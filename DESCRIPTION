@@ -1,0 +1,13 @@
+Package: dmcdmfigs
+Type: Package
+Title: Figures for Diet Mouse C. diff
+Version: 0.1.0
+Author: Madi Apgar
+Maintainer: The package maintainer <madison.apgar@cuanschutz.edu>
+Description: This package loads in all needed plots to compose figures for the
+    manuscript of the diet mouse C. difficle study done by the Lozupone lab at CU Anschutz.
+License: NA
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 2.10)
