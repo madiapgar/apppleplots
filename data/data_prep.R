@@ -168,10 +168,10 @@ figure_list <- list(all_day_plot = all_day_plot,
 
 ## going through the named list I created above
 ## and saving them to the data folder with the names I gave them
-walk2(figure_list,
+purrr::walk2(figure_list,
       names(figure_list),
       function(obj, name) {
         assign(name, obj)
-        do.call("use_data", list(as.name(name), overwrite = TRUE))
+        do.call(usethis::"use_data", list(as.name(name), overwrite = TRUE))
   }
 )
