@@ -10,6 +10,8 @@
 #' # example code
 #'
 #'
+#' @import magrittr
+#' @import ggplot2
 #' @export pcoa_plots
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)
@@ -65,9 +67,9 @@ pcoa_plots <- function(input_table,
     ggplot2::theme(legend.text = element_text(size = 12),
                    strip.text.y = element_text(angle = 0)) +
     ggplot2::ggtitle(title_content) +
-    ggplot2::legend(title = legend_name) +
     ggplot2::labs(x = x_name,
-                  y = y_name) -> plot
+                  y = y_name,
+                  fill = legend_name) -> plot
 
   if (facet_once == TRUE) {
     plot <- plot + ggplot2::facet_grid(~.data[[facet_cols]],

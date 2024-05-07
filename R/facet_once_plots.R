@@ -9,7 +9,9 @@
 #' @examples
 #' # example code
 #'
-#'
+#' @import magrittr
+#' @import ggplot2
+#' @importFrom ggpubr stat_pvalue_manual
 #' @export facet_once_plots
 #' @param input_table Expects a dataframe or tibble.
 #' @param stat_on_plot Uses stat_table to overlay p-value significance on plot, default is TRUE

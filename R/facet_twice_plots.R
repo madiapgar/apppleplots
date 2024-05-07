@@ -5,11 +5,11 @@
 #' `facet_twice_plots()` is similar to `facet_once_plots()` but gives you the option to facet by two variables
 #' and apply a log10 transformation to the y-axis. Best for use with longitudinal data.
 #'
-#' @section TEST:
-#'
 #' @examples
 #' # example code
 #'
+#' @import magrittr
+#' @import ggplot2
 #' @export facet_twice_plots
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)

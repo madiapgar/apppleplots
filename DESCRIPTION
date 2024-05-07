@@ -8,14 +8,14 @@ Description: This package contains all generated plots for the study on the effe
              and fat on the gut microbiome and metabolites it produces in the context of antibiotic-associated C. difficile infection
              done by the Lozupone lab at CU Anschutz. This package also includes base functions to create plots similar to those 
              generated and to run nonparametric pairwise comparisons/linear regression analysis. 
-License: NA
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 Depends: 
-    R (>= 2.10),
-    tidyverse,
+    R (>= 2.10)
+Imports:
     ggplot2,
-    rstatix,
-    ggh4x,
+    magrittr,
     ggpubr
 RoxygenNote: 7.2.3

@@ -9,6 +9,8 @@
 #' @examples
 #' # example code
 #'
+#' @import magrittr
+#' @import ggplot2
 #' @export correlation_plots
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)

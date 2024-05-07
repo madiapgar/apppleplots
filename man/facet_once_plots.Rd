@@ -61,5 +61,4 @@ to include p-value significance.
 \examples{
 # example code
 
-
 }

@@ -9,6 +9,8 @@
 #' @examples
 #' # example code
 #'
+#' @import magrittr
+#' @import ggplot2
 #' @export stat_heat_plot
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)
@@ -67,7 +69,7 @@ stat_heat_plot <- function(input_table,
     ggplot2::theme_bw() +
     ggplot2::xlab(x_name) +
     ggplot2::ylab(y_name) +
-    ggplot2::legend(title = legend_name) -> plot
+    ggplot2::labs(fill = legend_name) -> plot
 
   if (pairwise == TRUE) {
     plot <- plot +

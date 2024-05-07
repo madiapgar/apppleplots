@@ -46,17 +46,17 @@ pcoa_plots(
 \item{distiller_palette}{The name of the `scale_fill_distiller()` palette you want your points colored by (as a string),
 default is 'Spectral'}
 
-\item{facet_rows}{The column name that you want to facet your plot ROWS by (as a string)}
+\item{facet_rows}{The column name that you want to facet your plot ROWS by (as a string), default is NULL}
 
-\item{facet_cols}{The column name that you want to facet your plot COLUMNS by (as a string)}
+\item{facet_cols}{The column name that you want to facet your plot COLUMNS by (as a string), default is NULL}
 
-\item{row_labs}{A list of new facet ROW labels in the labeller format
+\item{row_labs}{A list of new facet ROW labels in the labeller format, default is NULL
 ex: new_facet_labs <- c('names',
                         'I want')
     names(new_facet_labs) <- c('old names',
                                'to be replaced')}
 
-\item{col_labs}{A list of new facet COLUMN labels in the labeller format (same as above)}
+\item{col_labs}{A list of new facet COLUMN labels in the labeller format (same as above), default is NULL}
 
 \item{legend_name}{The name of your legend (as a string)}
 

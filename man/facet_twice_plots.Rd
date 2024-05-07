@@ -62,10 +62,6 @@ ex: new_facet_labs <- c('names',
 `facet_twice_plots()` is similar to `facet_once_plots()` but gives you the option to facet by two variables
 and apply a log10 transformation to the y-axis. Best for use with longitudinal data.
 }
-\section{TEST}{
-
-}
-
 \examples{
 # example code
 
