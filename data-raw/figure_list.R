@@ -23,7 +23,6 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/figures/histo.rdata")
     load("~/projects/diet_mouse_cdiff/figures/metab.rdata")
     load("~/projects/diet_mouse_cdiff/figures/neat_histo_stats.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/neat_histo_cecum.rdata")
     load("~/projects/diet_mouse_cdiff/figures/neat_histo_colon.rdata")
     load("~/projects/diet_mouse_cdiff/figures/neat_toxin.rdata")
     load("~/projects/diet_mouse_cdiff/figures/short_fam_abun_stats.rdata")
@@ -107,7 +106,6 @@ load_data <- function(update){
                        histo_metabColon_plot = histo_metabColon_plot,
                        metab_plot = metab_plot,
                        metab_stat_vis = metab_stat_vis,
-                       neat_histo_cecum_plot = neat_histo_cecum_plot,
                        neat_histo_colon_plot = neat_histo_colon_plot,
                        neat_plot = neat_plot,
                        neat_tox_stat_vis = neat_tox_stat_vis,
@@ -122,17 +120,13 @@ load_data <- function(update){
                        tox_butanoic = tox_butanoic,
                        tox_metab_stat_vis = tox_metab_stat_vis,
                        tox_propanoic = tox_propanoic,
-                       unweighted_by_day = unweighted_by_day,
                        unweighted_pcoa = unweighted_pcoa,
                        uu_homog_plot = uu_homog_plot,
                        uu_homog_stat_vis = uu_homog_stat_vis,
                        uu_resil_plot = uu_resil_plot,
                        uu_resil_stat_vis = uu_resil_stat_vis,
-                       uw_adonis = uw_adonis,
-                       w_adonis = w_adonis,
                        w_homog_stat_vis = w_homog_stat_vis,
                        w_resil_stat_vis = w_resil_stat_vis,
-                       weighted_by_day = weighted_by_day,
                        weighted_pcoa = weighted_pcoa,
                        wu_homog_plot = wu_homog_plot,
                        wu_resil_plot = wu_resil_plot,
@@ -164,7 +158,6 @@ load_data <- function(update){
                        colon_histo_plot = colon_histo_plot,
                        genus_plot1 = genus_plot1,
                        mini_neat_cecumHisto_stats_plot = mini_neat_cecumHisto_stats_plot,
-                       tax_all = tax_all,
                        colony_bloodOnly_plot = colony_bloodOnly_plot,
                        poster_abun2 = poster_abun2,
                        histo_perc_plot = histo_perc_plot)
