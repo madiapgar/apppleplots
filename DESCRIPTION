@@ -17,5 +17,10 @@ Depends:
 Imports:
     ggplot2,
     magrittr,
-    ggpubr
+    ggpubr,
+    generics,
+    glue,
+    stats,
+    dplyr,
+    rstatix
 RoxygenNote: 7.2.3

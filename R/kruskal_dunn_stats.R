@@ -1,0 +1,103 @@
+#' Run a Kruskal-Wallis and Dunn's Post Hoc Test
+#'
+#' @description
+#'
+#' `kruskal_dunn_stats()` returns a named list containing dataframes with your Kruskal-Wallis and Dunn's
+#' Post Hoc test results.
+#'
+#'
+#' @examples
+#' # extracting results from the named list
+#' \dontrun{
+#' kruskal_dunn_results <- kruskal_dunn_stats(input_table = my_table,
+#'                                            grouped_by = 'location',
+#'                                            adjust_method = 'BH',
+#'                                            filter_adj_p_value = TRUE,
+#'                                            formula_left = 'blood_sugar',
+#'                                            formula_right = 'sex')
+#' kruskal <- kruskal_dunn_results$KruskalTest
+#' dunn <- kruskal_dunn_results$DunnTest
+#' }
+#'
+#' @import magrittr
+#' @importFrom dplyr group_by
+#' @importFrom dplyr do
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr arrange
+#' @importFrom dplyr mutate
+#' @importFrom dplyr filter
+#' @importFrom generics tidy
+#' @importFrom stats kruskal.test
+#' @importFrom stats reformulate
+#' @importFrom stats p.adjust
+#' @importFrom glue glue
+#' @importFrom rstatix dunn_test
+#' @importFrom rstatix add_xy_position
+#' @export kruskal_dunn_stats
+#' @param input_table Expects a dataframe or tibble.
+#' @param grouped_by The column name you want your data grouped by prior to statistical analysis (as a string or a list of strings).
+#' Typically it's whatever you've faceted your plot by (if you want your stats on your plot).
+#' @param adjust_method P-value adjustment method (as a string). Options: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY",
+#' "fdr", and "none".
+#' @param filter_adj_p_value If TRUE, will filter your Kruskal Test adjusted p-values <= 0.05 significance and will
+#' filter all non-significant results out of the input table prior to the Dunn's Post Hoc test. Default is TRUE.
+#' @param formula_left The column name of the variable you want tested on the left side of the formula (as a string).
+#'   ex: formula_left ~ formula_right
+#' @param formula_right The column name of the variable you want tested on the right side of the formula (as a string).
+#'   ex: formula_left ~ formula_right
+## this function runs a kruskal test followed by a dunns post hoc test on the data
+kruskal_dunn_stats <- function(input_table,
+                               grouped_by,
+                               adjust_method,
+                               filter_adj_p_value = TRUE,
+                               formula_left,
+                               formula_right){
+  ## kruskal test
+  input_table %>%
+    dplyr::group_by(input_table[grouped_by]) %>%
+    dplyr::do(generics::tidy(stats::kruskal.test(.data[[formula_left]] ~ .data[[formula_right]],
+                                                 data = input_table))) %>%
+    dplyr::ungroup() %>%
+    dplyr::arrange(.data$p.value) %>%
+    dplyr::mutate(p.adj = stats::p.adjust(.data$p.value,
+                                          method = adjust_method),
+                  test_id = paste(input_table[grouped_by])) -> kruskal_results
+
+  if (filter_adj_p_value == TRUE) {
+    kruskal_results <- kruskal_results %>%
+                        dplyr::filter(.data$p.adj <= 0.05)
+  } else {
+    kruskal_results
+  }
+
+  ## dunns post hoc test
+  ## need to use reformulate/glue to have function variables work with the dunn test formula
+  rightSide_name <- formula_right
+  funky_formula <- stats::reformulate(glue::glue("{rightSide_name}"),
+                                      glue::glue("{formula_left}"))
+
+  if (filter_adj_p_value == TRUE) {
+    input_table %>%
+      dplyr::group_by(input_table[grouped_by]) %>%
+      dplyr::mutate(test_id = paste(grouped_by)) %>%
+      dplyr::filter(.data$test_id %in% kruskal_results$test_id) %>%
+      rstatix::dunn_test(funky_formula,
+                         p.adjust.method = adjust_method,
+                         data = input_table) %>%
+      rstatix::add_xy_position(scales = 'free',
+                               fun = 'max') -> dunn_results
+  } else {
+  input_table %>%
+    dplyr::group_by(input_table[grouped_by]) %>%
+    rstatix::dunn_test(funky_formula,
+                       p.adjust.method = adjust_method,
+                       data = input_table) %>%
+    rstatix::add_xy_position(scales = 'free',
+                             fun = 'max') -> dunn_results
+  }
+
+  ## list of outputs
+  my_list <- list(KruskalTest = kruskal_results,
+                  DunnTest = dunn_results)
+  return(my_list)
+}
