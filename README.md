@@ -4,12 +4,12 @@ This repository contains an R package created to easily pull/manipulate visualiz
 
 ## Functions
 
-`correlation_plots()` - returns a plot faceted by two variables, gives you the option to apply a log10 transformation to the x and y-axis, and the line of best fit method is alterable.
-`facet_once_plots()` - returns a plot faceted by a single variable with data points, boxes, and contains an option to include p-value significance.
-`facet_twice_plots()` - is similar to `facet_once_plots()` but gives you the option to facet by two variables and apply a log10 transformation to the y-axis. Best for use with longitudinal data.
-`pcoa_plots()` - returns a PCoA plot based on your unweighted/weighted UniFrac results. Can be faceted once or twice by desired metadata variables.
-`stat_heat_plot()` - returns a heat map based on the statistical results entered. Most compatible with pairwise or linear regression results.
+    `correlation_plots()` - returns a plot faceted by two variables, gives you the option to apply a log10 transformation to the x and y-axis, and the line of best fit method is alterable.
+    `facet_once_plots()` - returns a plot faceted by a single variable with data points, boxes, and contains an option to include p-value significance.
+    `facet_twice_plots()` - is similar to `facet_once_plots()` but gives you the option to facet by two variables and apply a log10 transformation to the y-axis. Best for use with longitudinal data.
+    `pcoa_plots()` - returns a PCoA plot based on your unweighted/weighted UniFrac results. Can be faceted once or twice by desired metadata variables.
+    `stat_heat_plot()` - returns a heat map based on the statistical results entered. Most compatible with pairwise or linear regression results.
 
 ## Installation
 
-`if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")} devtools::install_github("madiapgar/apppleplots)`
+`if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")} devtools::install_github("madiapgar/apppleplots")`
