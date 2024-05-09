@@ -46,22 +46,22 @@ facet_twice_plots <- function(input_table,
                               x_name,
                               y_name,
                               title_content){
-  input_table %>%
-    ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
-    ggplot2::scale_x_continuous(breaks = x_labels) +
-    ggplot2::geom_boxplot(aes(group = .data[[box_group_by]]), outlier.shape = NA) +
-    ggplot2::geom_line(aes(group = .data[[line_group_by]]), alpha = 0.1) +
-    ggplot2::geom_smooth(se = FALSE) +
-    ggplot2::geom_jitter(width = 0.1, height = 0, alpha = point_alpha) +
-    ggplot2::theme_bw() +
-    ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
-                        cols = vars(.data[[facet_cols]]),
-                        labeller = labeller(.cols = col_labs,
-                                            .rows = row_labs)) +
-    ggplot2::theme(strip.text.y = element_text(angle = 0)) +
-    ggplot2::ggtitle(title_content) +
-    ggplot2::ylab(y_name) +
-    ggplot2::xlab(x_name) -> plot
+  plot <- input_table %>%
+            ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
+            ggplot2::scale_x_continuous(breaks = x_labels) +
+            ggplot2::geom_boxplot(aes(group = .data[[box_group_by]]), outlier.shape = NA) +
+            ggplot2::geom_line(aes(group = .data[[line_group_by]]), alpha = 0.1) +
+            ggplot2::geom_smooth(se = FALSE) +
+            ggplot2::geom_jitter(width = 0.1, height = 0, alpha = point_alpha) +
+            ggplot2::theme_bw() +
+            ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
+                                cols = vars(.data[[facet_cols]]),
+                                labeller = labeller(.cols = col_labs,
+                                                    .rows = row_labs)) +
+            ggplot2::theme(strip.text.y = element_text(angle = 0)) +
+            ggplot2::ggtitle(title_content) +
+            ggplot2::ylab(y_name) +
+            ggplot2::xlab(x_name)
 
   if (y_transform == 'TRUE') {
     plot <- plot + ggplot2::scale_y_continuous(trans = 'log10')

@@ -54,22 +54,22 @@ stat_heat_plot <- function(input_table,
                            x_name,
                            y_name,
                            title_content){
-  input_table %>%
-    ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
-    ggplot2::geom_tile(aes(fill = .data[[tile_fill]]),
-                       color = tile_outline_color,
-                       alpha = tile_alpha) +
-    ggplot2::geom_text(aes(label = .data[[text_value]])) +
-    ggplot2::scale_fill_gradient2(low = low_color,
-                                  high = high_color) +
-    ggplot2::scale_y_discrete(labels = y_labels) +
-    ggplot2::facet_wrap(~.data[[facet_by]],
-                        labeller = labeller(.cols = facet_labels),
-                        scales = 'free_x') +
-    ggplot2::theme_bw() +
-    ggplot2::xlab(x_name) +
-    ggplot2::ylab(y_name) +
-    ggplot2::labs(fill = legend_name) -> plot
+  plot <- input_table %>%
+            ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
+            ggplot2::geom_tile(aes(fill = .data[[tile_fill]]),
+                               color = tile_outline_color,
+                               alpha = tile_alpha) +
+            ggplot2::geom_text(aes(label = .data[[text_value]])) +
+            ggplot2::scale_fill_gradient2(low = low_color,
+                                          high = high_color) +
+            ggplot2::scale_y_discrete(labels = y_labels) +
+            ggplot2::facet_wrap(~.data[[facet_by]],
+                                labeller = labeller(.cols = facet_labels),
+                                scales = 'free_x') +
+            ggplot2::theme_bw() +
+            ggplot2::xlab(x_name) +
+            ggplot2::ylab(y_name) +
+            ggplot2::labs(fill = legend_name)
 
   if (pairwise == TRUE) {
     plot <- plot +

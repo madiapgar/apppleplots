@@ -53,15 +53,15 @@ kruskal_dunn_stats <- function(input_table,
                                formula_left,
                                formula_right){
   ## kruskal test
-  input_table %>%
-    dplyr::group_by(input_table[grouped_by]) %>%
-    dplyr::do(generics::tidy(stats::kruskal.test(.data[[formula_left]] ~ .data[[formula_right]],
-                                                 data = input_table))) %>%
-    dplyr::ungroup() %>%
-    dplyr::arrange(.data$p.value) %>%
-    dplyr::mutate(p.adj = stats::p.adjust(.data$p.value,
-                                          method = adjust_method),
-                  test_id = paste(input_table[grouped_by])) -> kruskal_results
+  kruskal_results <- input_table %>%
+                      dplyr::group_by(input_table[grouped_by]) %>%
+                      dplyr::do(generics::tidy(stats::kruskal.test(.data[[formula_left]] ~ .data[[formula_right]],
+                                                                   data = input_table))) %>%
+                      dplyr::ungroup() %>%
+                      dplyr::arrange(.data$p.value) %>%
+                      dplyr::mutate(p.adj = stats::p.adjust(.data$p.value,
+                                                            method = adjust_method),
+                                    test_id = paste(input_table[grouped_by]))
 
   if (filter_adj_p_value == TRUE) {
     kruskal_results <- kruskal_results %>%
@@ -77,23 +77,23 @@ kruskal_dunn_stats <- function(input_table,
                                       glue::glue("{formula_left}"))
 
   if (filter_adj_p_value == TRUE) {
-    input_table %>%
-      dplyr::group_by(input_table[grouped_by]) %>%
-      dplyr::mutate(test_id = paste(grouped_by)) %>%
-      dplyr::filter(.data$test_id %in% kruskal_results$test_id) %>%
-      rstatix::dunn_test(funky_formula,
-                         p.adjust.method = adjust_method,
-                         data = input_table) %>%
-      rstatix::add_xy_position(scales = 'free',
-                               fun = 'max') -> dunn_results
+    dunn_results <- input_table %>%
+                      dplyr::group_by(input_table[grouped_by]) %>%
+                      dplyr::mutate(test_id = paste(grouped_by)) %>%
+                      dplyr::filter(.data$test_id %in% kruskal_results$test_id) %>%
+                      rstatix::dunn_test(funky_formula,
+                                         p.adjust.method = adjust_method,
+                                         data = input_table) %>%
+                      rstatix::add_xy_position(scales = 'free',
+                                               fun = 'max')
   } else {
-  input_table %>%
-    dplyr::group_by(input_table[grouped_by]) %>%
-    rstatix::dunn_test(funky_formula,
-                       p.adjust.method = adjust_method,
-                       data = input_table) %>%
-    rstatix::add_xy_position(scales = 'free',
-                             fun = 'max') -> dunn_results
+    dunn_results <- input_table %>%
+                      dplyr::group_by(input_table[grouped_by]) %>%
+                      rstatix::dunn_test(funky_formula,
+                                         p.adjust.method = adjust_method,
+                                         data = input_table) %>%
+                      rstatix::add_xy_position(scales = 'free',
+                                               fun = 'max')
   }
 
   ## list of outputs

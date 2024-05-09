@@ -56,20 +56,20 @@ pcoa_plots <- function(input_table,
                        x_name,
                        y_name,
                        title_content){
-  input_table %>%
-    ggplot2::ggplot(aes(x = x_value, y = y_value)) +
-    ggplot2::geom_point(aes(fill = point_fill),
-                        pch = 21,
-                        alpha = point_alpha,
-                        size = point_size) +
-    ggplot2::theme_bw() +
-    ggplot2::scale_fill_distiller(palette = distiller_palette) +
-    ggplot2::theme(legend.text = element_text(size = 12),
-                   strip.text.y = element_text(angle = 0)) +
-    ggplot2::ggtitle(title_content) +
-    ggplot2::labs(x = x_name,
-                  y = y_name,
-                  fill = legend_name) -> plot
+  plot <- input_table %>%
+            ggplot2::ggplot(aes(x = x_value, y = y_value)) +
+            ggplot2::geom_point(aes(fill = point_fill),
+                                pch = 21,
+                                alpha = point_alpha,
+                                size = point_size) +
+            ggplot2::theme_bw() +
+            ggplot2::scale_fill_distiller(palette = distiller_palette) +
+            ggplot2::theme(legend.text = element_text(size = 12),
+                           strip.text.y = element_text(angle = 0)) +
+            ggplot2::ggtitle(title_content) +
+            ggplot2::labs(x = x_name,
+                          y = y_name,
+                          fill = legend_name)
 
   if (facet_once == TRUE) {
     plot <- plot + ggplot2::facet_grid(~.data[[facet_cols]],
