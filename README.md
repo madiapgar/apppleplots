@@ -1,6 +1,6 @@
 # apppleplots Package
 
-This repository contains an R package created to easily pull/manipulate visualizations and commonly used functions in association with https://github.com/madiapgar/diet_mouse_cdiff. 
+This repository contains an R package created to easily pull/manipulate visualizations and commonly used functions in association with [this study](https://github.com/madiapgar/diet_mouse_cdiff). 
 
 ## Functions
 
@@ -13,6 +13,8 @@ This repository contains an R package created to easily pull/manipulate visualiz
 `pcoa_plots()` - returns a PCoA plot based on your unweighted/weighted UniFrac results. Can be faceted once or twice by desired metadata variables.
 
 `stat_heat_plot()` - returns a heat map based on the statistical results entered. Most compatible with pairwise or linear regression results.
+
+`kruskal_dunn_stats()` - returns a named list containing dataframes with your Kruskal-Wallis and Dunn's Post Hoc test results.
 
 ## Installation
 
