@@ -37,6 +37,8 @@
 #' @param input_table Expects a dataframe or tibble.
 #' @param grouped_by The column name you want your data grouped by prior to statistical analysis (as a string or a list of strings).
 #' Typically it's whatever you've faceted your plot by (if you want your stats on your plot).
+#' @param multiple_groups If TRUE, will know that you've grouped your data by two columns. If FALSE, will know that you've only grouped
+#' your data by one column. Default is TRUE.
 #' @param adjust_method P-value adjustment method (as a string). Options: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY",
 #' "fdr", and "none".
 #' @param filter_adj_p_value If TRUE, will filter your Kruskal Test adjusted p-values <= 0.05 significance and will
@@ -48,11 +50,12 @@
 ## this function runs a kruskal test followed by a dunns post hoc test on the data
 kruskal_dunn_stats <- function(input_table,
                                grouped_by,
+                               multiple_groups = TRUE,
                                adjust_method,
                                filter_adj_p_value = TRUE,
                                formula_left,
                                formula_right){
-  ## kruskal test
+  # kruskal test
   kruskal_results <- input_table %>%
                       dplyr::group_by(input_table[grouped_by]) %>%
                       dplyr::do(generics::tidy(stats::kruskal.test(.data[[formula_left]] ~ .data[[formula_right]],
@@ -60,14 +63,25 @@ kruskal_dunn_stats <- function(input_table,
                       dplyr::ungroup() %>%
                       dplyr::arrange(.data$p.value) %>%
                       dplyr::mutate(p.adj = stats::p.adjust(.data$p.value,
-                                                            method = adjust_method),
-                                    test_id = paste(input_table[grouped_by]))
+                                                            method = adjust_method))
 
-  if (filter_adj_p_value == TRUE) {
+  colname1 <- colnames(kruskal_results)[1]
+  colname2 <- colnames(kruskal_results)[2]
+
+
+  if (multiple_groups == TRUE) {
     kruskal_results <- kruskal_results %>%
-                        dplyr::filter(.data$p.adj <= 0.05)
+                          dplyr::mutate(test_id = paste(.data[[colname1]], .data[[colname2]], sep = "_"))
+
+    alt_input <- input_table %>%
+                    dplyr::mutate(test_id = paste(.data[[grouped_by[1]]], .data[[grouped_by[2]]],
+                                                  sep = "_"))
   } else {
-    kruskal_results
+    kruskal_results <- kruskal_results %>%
+                          dplyr::mutate(test_id = paste(.data[[colname1]]))
+
+    alt_input <- input_table %>%
+                    dplyr::mutate(test_id = paste(.data[[grouped_by[1]]]))
   }
 
   ## dunns post hoc test
@@ -77,21 +91,25 @@ kruskal_dunn_stats <- function(input_table,
                                       glue::glue("{formula_left}"))
 
   if (filter_adj_p_value == TRUE) {
-    dunn_results <- input_table %>%
-                      dplyr::group_by(input_table[grouped_by]) %>%
-                      dplyr::mutate(test_id = paste(grouped_by)) %>%
+    kruskal_results <- kruskal_results %>%
+                        dplyr::filter(.data$p.adj <= 0.05)
+
+    dunn_results <- alt_input %>%
+                      dplyr::group_by(alt_input[grouped_by]) %>%
                       dplyr::filter(.data$test_id %in% kruskal_results$test_id) %>%
                       rstatix::dunn_test(funky_formula,
                                          p.adjust.method = adjust_method,
-                                         data = input_table) %>%
+                                         data = .) %>%
                       rstatix::add_xy_position(scales = 'free',
                                                fun = 'max')
   } else {
-    dunn_results <- input_table %>%
-                      dplyr::group_by(input_table[grouped_by]) %>%
+    kruskal_results
+
+    dunn_results <- alt_input %>%
+                      dplyr::group_by(alt_input[grouped_by]) %>%
                       rstatix::dunn_test(funky_formula,
                                          p.adjust.method = adjust_method,
-                                         data = input_table) %>%
+                                         data = .) %>%
                       rstatix::add_xy_position(scales = 'free',
                                                fun = 'max')
   }

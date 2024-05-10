@@ -7,6 +7,7 @@
 kruskal_dunn_stats(
   input_table,
   grouped_by,
+  multiple_groups = TRUE,
   adjust_method,
   filter_adj_p_value = TRUE,
   formula_left,
@@ -18,6 +19,9 @@ kruskal_dunn_stats(
 
 \item{grouped_by}{The column name you want your data grouped by prior to statistical analysis (as a string or a list of strings).
 Typically it's whatever you've faceted your plot by (if you want your stats on your plot).}
+
+\item{multiple_groups}{If TRUE, will know that you've grouped your data by two columns. If FALSE, will know that you've only grouped
+your data by one column. Default is TRUE.}
 
 \item{adjust_method}{P-value adjustment method (as a string). Options: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY",
 "fdr", and "none".}
