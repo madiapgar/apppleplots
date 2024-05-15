@@ -13,7 +13,8 @@ pcoa_plots(
   point_fill,
   point_alpha = 0.7,
   point_size = 2,
-  distiller_palette = "Spectral",
+  fill_type,
+  palette,
   facet_rows = NULL,
   facet_cols = NULL,
   row_labs = NULL,
@@ -43,8 +44,11 @@ pcoa_plots(
 
 \item{point_size}{Enter a numeric value to change the size of your points, default is 2}
 
-\item{distiller_palette}{The name of the `scale_fill_distiller()` palette you want your points colored by (as a string),
-default is 'Spectral'}
+\item{fill_type}{Is your color/fill value continuous or discrete? Accepts inputs of 'NULL' (you don't want your points colored),
+'continuous' or 'discrete'.}
+
+\item{palette}{The name of the `scale_color_brewer()` palette you want your points colored by (as a string). Make sure
+that you're choosing a palette that's appropriate for the data you want colored (continuous v discrete).}
 
 \item{facet_rows}{The column name that you want to facet your plot ROWS by (as a string), default is NULL}
 

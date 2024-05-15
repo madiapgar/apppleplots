@@ -59,26 +59,26 @@ kruskal_dunn_stats <- function(input_table,
   kruskal_results <- input_table %>%
                       dplyr::group_by(input_table[grouped_by]) %>%
                       dplyr::do(generics::tidy(stats::kruskal.test(.data[[formula_left]] ~ .data[[formula_right]],
-                                                                   data = input_table))) %>%
+                                                                   data = .))) %>%
                       dplyr::ungroup() %>%
                       dplyr::arrange(.data$p.value) %>%
                       dplyr::mutate(p.adj = stats::p.adjust(.data$p.value,
                                                             method = adjust_method))
 
-  colname1 <- colnames(kruskal_results)[1]
-  colname2 <- colnames(kruskal_results)[2]
-
 
   if (multiple_groups == TRUE) {
     kruskal_results <- kruskal_results %>%
-                          dplyr::mutate(test_id = paste(.data[[colname1]], .data[[colname2]], sep = "_"))
+                          dplyr::mutate(test_id = paste(.data[[grouped_by[1]]],
+                                                        .data[[grouped_by[2]]],
+                                                        sep = "_"))
 
     alt_input <- input_table %>%
-                    dplyr::mutate(test_id = paste(.data[[grouped_by[1]]], .data[[grouped_by[2]]],
+                    dplyr::mutate(test_id = paste(.data[[grouped_by[1]]],
+                                                  .data[[grouped_by[2]]],
                                                   sep = "_"))
   } else {
     kruskal_results <- kruskal_results %>%
-                          dplyr::mutate(test_id = paste(.data[[colname1]]))
+                          dplyr::mutate(test_id = paste(.data[[grouped_by[1]]]))
 
     alt_input <- input_table %>%
                     dplyr::mutate(test_id = paste(.data[[grouped_by[1]]]))

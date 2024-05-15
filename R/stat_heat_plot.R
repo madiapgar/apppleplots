@@ -15,6 +15,10 @@
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)
 #' @param y_value The column name of what you want on the y-axis (as a string)
+#' @param x_value_type Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+#' 'continuous' or 'discrete'.
+#' @param y_value_type Is your y-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you y-axis re-labeled),
+#' 'continuous' or 'discrete'.
 #' @param pairwise Formats plot for pairwise test results (i.e have group comparisons), default is FALSE
 #' @param correlation Formats plot for linear regression test results (i.e correlation comparisons), default is FALSE
 #' @param tile_fill The column name of which numeric value you want fill the tiles (as as string)
@@ -38,6 +42,8 @@
 stat_heat_plot <- function(input_table,
                            x_value,
                            y_value,
+                           x_value_type = NULL,
+                           y_value_type = NULL,
                            pairwise = FALSE,
                            correlation = FALSE,
                            tile_fill,
@@ -47,8 +53,8 @@ stat_heat_plot <- function(input_table,
                            low_color = 'blue',
                            high_color = 'green',
                            legend_name,
-                           x_labels,
-                           y_labels,
+                           x_labels = NULL,
+                           y_labels = NULL,
                            facet_by,
                            facet_labels,
                            x_name,
@@ -62,7 +68,6 @@ stat_heat_plot <- function(input_table,
             ggplot2::geom_text(aes(label = .data[[text_value]])) +
             ggplot2::scale_fill_gradient2(low = low_color,
                                           high = high_color) +
-            ggplot2::scale_y_discrete(labels = y_labels) +
             ggplot2::facet_wrap(~.data[[facet_by]],
                                 labeller = labeller(.cols = facet_labels),
                                 scales = 'free_x') +
@@ -71,9 +76,29 @@ stat_heat_plot <- function(input_table,
             ggplot2::ylab(y_name) +
             ggplot2::labs(fill = legend_name)
 
+  if (is.null(x_value_type)) {
+    plot
+  } else {
+    if (x_value_type == 'discrete') {
+      plot <- plot + ggplot2::scale_x_discrete(labels = x_labels)
+    } else {
+      plot <- plot + ggplot2::scale_x_continuous(breaks = x_labels)
+    }
+  }
+
+
+  if (is.null(y_value_type)) {
+    plot
+  } else {
+    if (y_value_type == 'discrete') {
+      plot <- plot + ggplot2::scale_y_discrete(labels = y_labels)
+    } else {
+      plot <- plot + ggplot2::scale_y_continuous(breaks = y_labels)
+    }
+  }
+
   if (pairwise == TRUE) {
     plot <- plot +
-      ggplot2::scale_x_continuous(breaks = x_labels) +
       ggplot2::ggtitle(label = title_content,
                        subtitle = 'Group 1') +
       ggplot2::theme(strip.text.y = element_text(angle = 0),
@@ -84,7 +109,6 @@ stat_heat_plot <- function(input_table,
 
   if (correlation == TRUE) {
     plot <- plot +
-      ggplot2::scale_x_discrete(labels = x_labels) +
       ggplot2::ggtitle(title_content)
   } else {
     plot

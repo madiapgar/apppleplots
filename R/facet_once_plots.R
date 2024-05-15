@@ -14,9 +14,11 @@
 #' @importFrom ggpubr stat_pvalue_manual
 #' @export facet_once_plots
 #' @param input_table Expects a dataframe or tibble.
-#' @param stat_on_plot Uses stat_table to overlay p-value significance on plot, default is TRUE
+#' @param stat_on_plot Uses stat_table to overlay p-value significance on plot, default is FALSE
 #' @param x_value The column name of what you want on the x-axis (as a string)
 #' @param y_value The column name of what you want on the y-axis (as a string)
+#' @param x_value_type Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+#' 'continuous' or 'discrete'.
 #' @param grouped_by The column name of how you want your boxplots to be grouped, typically is the same as
 #'   the x-axis column name (as a string)
 #' @param point_alpha Enter a numeric value between 0 and 1 to change the transparency of your points
@@ -34,9 +36,10 @@
 #' @param y_name The name of your y-axis (as a string)
 #' @param title_content The title of your plot (as a string)
 facet_once_plots <- function(input_table,
-                             stat_on_plot = TRUE,
+                             stat_on_plot = FALSE,
                              x_value,
                              y_value,
+                             x_value_type,
                              grouped_by,
                              point_alpha,
                              x_labels,
@@ -50,13 +53,22 @@ facet_once_plots <- function(input_table,
             ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
             ggplot2::geom_boxplot(aes(group = .data[[grouped_by]])) +
             ggplot2::geom_jitter(alpha = point_alpha, width = 0.1, height = 0) +
-            ggplot2::scale_x_discrete(labels = x_labels) +
             ggplot2::theme_bw() +
             ggplot2::facet_grid(~.data[[facet_by]],
                                 labeller = labeller(.cols = facet_labels)) +
             ggplot2::labs(x = x_name,
                           y = y_name,
                           title = title_content)
+
+  if (is.null(x_value_type)) {
+    plot
+  } else {
+    if (x_value_type == 'discrete') {
+      plot <- plot + ggplot2::scale_x_discrete(labels = x_labels)
+    } else {
+      plot <- plot + ggplot2::scale_x_continuous(breaks = x_labels)
+    }
+  }
 
   if (stat_on_plot == 'TRUE') {
     plot <- plot + ggpubr::stat_pvalue_manual(stat_table,

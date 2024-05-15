@@ -6,9 +6,10 @@
 \usage{
 facet_once_plots(
   input_table,
-  stat_on_plot = TRUE,
+  stat_on_plot = FALSE,
   x_value,
   y_value,
+  x_value_type,
   grouped_by,
   point_alpha,
   x_labels,
@@ -23,11 +24,14 @@ facet_once_plots(
 \arguments{
 \item{input_table}{Expects a dataframe or tibble.}
 
-\item{stat_on_plot}{Uses stat_table to overlay p-value significance on plot, default is TRUE}
+\item{stat_on_plot}{Uses stat_table to overlay p-value significance on plot, default is FALSE}
 
 \item{x_value}{The column name of what you want on the x-axis (as a string)}
 
 \item{y_value}{The column name of what you want on the y-axis (as a string)}
+
+\item{x_value_type}{Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+'continuous' or 'discrete'.}
 
 \item{grouped_by}{The column name of how you want your boxplots to be grouped, typically is the same as
 the x-axis column name (as a string)}

@@ -14,7 +14,9 @@
 #' @param input_table Expects a dataframe or tibble.
 #' @param x_value The column name of what you want on the x-axis (as a string)
 #' @param y_value The column name of what you want on the y-axis (as a string)
-#' @param y_transform Applies log10 transformation to y-axis values, default is TRUE
+#' @param x_value_type Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+#' 'continuous' or 'discrete'.
+#' @param y_transform Applies log10 transformation to y-axis values, default is FALSE
 #' @param x_labels A list of new labels for x-axis values (requires a continuous variable)
 #' @param box_group_by The column name of how you want your boxplots to be grouped, typically is the same as
 #'   the x-axis column name (as a string)
@@ -34,7 +36,8 @@
 facet_twice_plots <- function(input_table,
                               x_value,
                               y_value,
-                              y_transform = TRUE,
+                              x_value_type,
+                              y_transform = FALSE,
                               x_labels,
                               box_group_by,
                               line_group_by,
@@ -48,7 +51,6 @@ facet_twice_plots <- function(input_table,
                               title_content){
   plot <- input_table %>%
             ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
-            ggplot2::scale_x_continuous(breaks = x_labels) +
             ggplot2::geom_boxplot(aes(group = .data[[box_group_by]]), outlier.shape = NA) +
             ggplot2::geom_line(aes(group = .data[[line_group_by]]), alpha = 0.1) +
             ggplot2::geom_smooth(se = FALSE) +
@@ -62,6 +64,17 @@ facet_twice_plots <- function(input_table,
             ggplot2::ggtitle(title_content) +
             ggplot2::ylab(y_name) +
             ggplot2::xlab(x_name)
+
+  if (is.null(x_value_type)) {
+    plot
+  } else {
+    if (x_value_type == 'discrete') {
+      plot <- plot + ggplot2::scale_x_discrete(labels = x_labels)
+    } else {
+      plot <- plot + ggplot2::scale_x_continuous(breaks = x_labels)
+    }
+  }
+
 
   if (y_transform == 'TRUE') {
     plot <- plot + ggplot2::scale_y_continuous(trans = 'log10')

@@ -8,7 +8,8 @@ facet_twice_plots(
   input_table,
   x_value,
   y_value,
-  y_transform = TRUE,
+  x_value_type,
+  y_transform = FALSE,
   x_labels,
   box_group_by,
   line_group_by,
@@ -29,7 +30,10 @@ facet_twice_plots(
 
 \item{y_value}{The column name of what you want on the y-axis (as a string)}
 
-\item{y_transform}{Applies log10 transformation to y-axis values, default is TRUE}
+\item{x_value_type}{Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+'continuous' or 'discrete'.}
+
+\item{y_transform}{Applies log10 transformation to y-axis values, default is FALSE}
 
 \item{x_labels}{A list of new labels for x-axis values (requires a continuous variable)}
 

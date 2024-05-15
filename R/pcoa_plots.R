@@ -23,8 +23,10 @@
 #' @param point_fill The column name of what you want your points to be colored/filled by (as a string)
 #' @param point_alpha Enter a numeric value between 0 and 1 to change the transparency of your points, default is 0.7
 #' @param point_size Enter a numeric value to change the size of your points, default is 2
-#' @param distiller_palette The name of the `scale_fill_distiller()` palette you want your points colored by (as a string),
-#' default is 'Spectral'
+#' @param fill_type Is your color/fill value continuous or discrete? Accepts inputs of 'NULL' (you don't want your points colored),
+#' 'continuous' or 'discrete'.
+#' @param palette The name of the `scale_color_brewer()` palette you want your points colored by (as a string). Make sure
+#' that you're choosing a palette that's appropriate for the data you want colored (continuous v discrete).
 #' @param facet_rows The column name that you want to facet your plot ROWS by (as a string), default is NULL
 #' @param facet_cols The column name that you want to facet your plot COLUMNS by (as a string), default is NULL
 #' @param row_labs A list of new facet ROW labels in the labeller format, default is NULL
@@ -47,7 +49,8 @@ pcoa_plots <- function(input_table,
                        point_fill,
                        point_alpha = 0.7,
                        point_size = 2,
-                       distiller_palette = 'Spectral',
+                       fill_type,
+                       palette,
                        facet_rows = NULL,
                        facet_cols = NULL,
                        row_labs = NULL,
@@ -57,19 +60,28 @@ pcoa_plots <- function(input_table,
                        y_name,
                        title_content){
   plot <- input_table %>%
-            ggplot2::ggplot(aes(x = x_value, y = y_value)) +
-            ggplot2::geom_point(aes(fill = point_fill),
+            ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
+            ggplot2::geom_point(aes(fill = .data[[point_fill]]),
                                 pch = 21,
                                 alpha = point_alpha,
                                 size = point_size) +
             ggplot2::theme_bw() +
-            ggplot2::scale_fill_distiller(palette = distiller_palette) +
             ggplot2::theme(legend.text = element_text(size = 12),
                            strip.text.y = element_text(angle = 0)) +
             ggplot2::ggtitle(title_content) +
             ggplot2::labs(x = x_name,
                           y = y_name,
                           fill = legend_name)
+
+  if (is.null(fill_type)) {
+    plot
+  } else {
+    if (fill_type == 'discrete') {
+      plot <- plot + ggplot2::scale_fill_brewer(palette = palette)
+    } else {
+      plot <- plot + ggplot2::scale_fill_distiller(palette = palette)
+    }
+  }
 
   if (facet_once == TRUE) {
     plot <- plot + ggplot2::facet_grid(~.data[[facet_cols]],
@@ -79,8 +91,8 @@ pcoa_plots <- function(input_table,
   }
 
   if (facet_twice == TRUE) {
-    plot <- plot + ggplot2::facet_grid(rows = .data[[facet_rows]],
-                                       cols = .data[[facet_cols]],
+    plot <- plot + ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
+                                       cols = vars(.data[[facet_cols]]),
                                        labeller = labeller(.rows = row_labs,
                                                            .cols = col_labs))
   } else {

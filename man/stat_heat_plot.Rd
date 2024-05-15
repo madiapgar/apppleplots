@@ -8,6 +8,8 @@ stat_heat_plot(
   input_table,
   x_value,
   y_value,
+  x_value_type = NULL,
+  y_value_type = NULL,
   pairwise = FALSE,
   correlation = FALSE,
   tile_fill,
@@ -17,8 +19,8 @@ stat_heat_plot(
   low_color = "blue",
   high_color = "green",
   legend_name,
-  x_labels,
-  y_labels,
+  x_labels = NULL,
+  y_labels = NULL,
   facet_by,
   facet_labels,
   x_name,
@@ -32,6 +34,12 @@ stat_heat_plot(
 \item{x_value}{The column name of what you want on the x-axis (as a string)}
 
 \item{y_value}{The column name of what you want on the y-axis (as a string)}
+
+\item{x_value_type}{Is your x-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you x-axis re-labeled),
+'continuous' or 'discrete'.}
+
+\item{y_value_type}{Is your y-axis value continuous or discrete? Accepts inputs of 'NULL' (you don't want you y-axis re-labeled),
+'continuous' or 'discrete'.}
 
 \item{pairwise}{Formats plot for pairwise test results (i.e have group comparisons), default is FALSE}
 
