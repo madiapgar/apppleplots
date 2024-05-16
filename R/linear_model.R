@@ -53,8 +53,7 @@ linear_model <- function(input_table,
               dplyr::filter(.data$p.adj <= 0.05)
 
   pre_lm <- pre_lm %>%
-              dplyr::mutate(test_id = paste(.data[[grouped_by[1]]]),
-                            test_id = paste(.data$test_id, .data[[grouped_by[2]]], sep = "_"))
+              dplyr::mutate(test_id = paste(.data[[grouped_by[1]]], .data[[grouped_by[2]]], sep = "_"))
 
   linear_model_results <- input_table %>%
                             stats::na.omit() %>%

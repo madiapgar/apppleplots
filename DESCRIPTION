@@ -23,7 +23,7 @@ Imports:
     stats,
     dplyr,
     rstatix
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

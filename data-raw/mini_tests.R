@@ -142,7 +142,7 @@ exercise_df %>%
   group_by(location, sex, predominant_activity) %>%
   summarise(mean_heart_rate = mean(heart_rate)) -> mean_exercise_df
 
-
+## I don't think this function will be one that you add, its more for your own use
 test_dunn %>%
   merge(mean_exercise_df,
         by.x = c('group1',
@@ -186,3 +186,6 @@ test_stat_plot <- stat_heat_plot(input_table = new_test_dunn,
                                  title_content = 'Test stat_heat_plot')
 
 test_stat_plot
+
+## linear_model()
+
