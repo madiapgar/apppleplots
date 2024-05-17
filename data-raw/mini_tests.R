@@ -188,4 +188,12 @@ test_stat_plot <- stat_heat_plot(input_table = new_test_dunn,
 test_stat_plot
 
 ## linear_model()
-
+linear_model <- linear_model(input_table = exercise_df,
+                             grouped_by = c('sex',
+                                            'location'),
+                             multiple_groups = TRUE,
+                             adjust_method = 'BH',
+                             filter_adj_p_value = FALSE,
+                             formula_left = 'heart_rate',
+                             formula_right = 'bmi + predominant_activity')
+linear_model
