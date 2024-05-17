@@ -16,6 +16,8 @@ This repository contains an R package created to easily pull/manipulate visualiz
 
 `kruskal_dunn_stats()` - returns a named list containing dataframes with your Kruskal-Wallis and Dunn's Post Hoc test results.
 
+`linear_model()` returns a dataframe with results of your linear regression analysis.
+
 ## Installation
 
 `if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")} devtools::install_github("madiapgar/apppleplots")`
