@@ -11,7 +11,6 @@
 #' krDunn_stat_list <- kruskal_dunn_stats(input_table = exercise_df,
 #'                                        grouped_by = c('location',
 #'                                                        'sex'),
-#'                                        multiple_groups = TRUE,
 #'                                        adjust_method = 'BH',
 #'                                        filter_adj_p_value = FALSE,
 #'                                        formula_left = 'heart_rate',
@@ -38,8 +37,6 @@
 #' @param input_table Expects a dataframe or tibble.
 #' @param grouped_by The column name you want your data grouped by prior to statistical analysis (as a string or a list of strings).
 #' Typically it's whatever you've faceted your plot by (if you want your stats on your plot).
-#' @param multiple_groups If TRUE, will know that you've grouped your data by two columns. If FALSE, will know that you've only grouped
-#' your data by one column. Default is FALSE.
 #' @param adjust_method P-value adjustment method (as a string). Options: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY",
 #' "fdr", and "none".
 #' @param filter_adj_p_value If TRUE, will filter your Kruskal Test adjusted p-values <= 0.05 significance and will
@@ -51,7 +48,6 @@
 ## this function runs a kruskal test followed by a dunns post hoc test on the data
 kruskal_dunn_stats <- function(input_table,
                                grouped_by,
-                               multiple_groups = FALSE,
                                adjust_method,
                                filter_adj_p_value = FALSE,
                                formula_left,
@@ -67,16 +63,18 @@ kruskal_dunn_stats <- function(input_table,
                                                             method = adjust_method))
 
 
-  if (multiple_groups == TRUE) {
-    kruskal_results <- kruskal_results %>%
-                          dplyr::mutate(test_id = paste(.data[[grouped_by[1]]],
-                                                        .data[[grouped_by[2]]],
-                                                        sep = "_"))
+  if (length(grouped_by) > 1) {
+    mini_kruskal_results <- kruskal_results %>%
+                              dplyr::select(grouped_by)
 
-    alt_input <- input_table %>%
-                    dplyr::mutate(test_id = paste(.data[[grouped_by[1]]],
-                                                  .data[[grouped_by[2]]],
-                                                  sep = "_"))
+    kruskal_results <- cbind(kruskal_results, test_id=do.call(paste, c(mini_kruskal_results,
+                                                                       sep = "_")))
+
+    mini_input <- input_table %>%
+                    dplyr::select(grouped_by)
+
+    alt_input <- cbind(input_table, test_id=do.call(paste, c(mini_input, sep = "_")))
+
   } else {
     kruskal_results <- kruskal_results %>%
                           dplyr::mutate(test_id = paste(.data[[grouped_by[1]]]))
