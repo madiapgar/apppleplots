@@ -39,15 +39,13 @@ ex: formula_left ~ formula_right}
 `linear_model()` returns a dataframe with results of your linear regression analysis.
 }
 \examples{
-\dontrun{
 linear_model <- linear_model(input_table = exercise_df,
-                             grouped_by = c('location',
-                                            'sex'),
+                             grouped_by = c('sex',
+                                            'location'),
                              multiple_groups = TRUE,
                              adjust_method = 'BH',
-                             filter_adj_p_value = TRUE,
+                             filter_adj_p_value = FALSE,
                              formula_left = 'heart_rate',
-                             formula_right = 'predominant_activity')
-}
+                             formula_right = 'bmi + predominant_activity')
 
 }

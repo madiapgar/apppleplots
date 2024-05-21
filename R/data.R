@@ -608,5 +608,45 @@ NULL
 #' @format ggplot object
 "wu_resil_plot"
 
+#' Exercise Data
+#'
+#' Generated data for the purpose of package testing and function examples. Note: this data is completely
+#' fake and was randomly generated in R based off of healthy ranges for each value. These samples were not
+#' obtained by sampling actual people.
+#'
+#' @format
+#' A dataframe with 100 rows and 10 columns:
+#' \describe{
+#' \item{sampleid}{IDs for each individual sample}
+#' \item{sex}{Sex of each individual}
+#' \item{location}{The state the individual lives in}
+#' \item{heart_rate}{The average resting heart rate of each individual}
+#' \item{exercise_mins}{The average amount of time spent exercising per workout (in minutes)}
+#' \item{exercise_weekly}{The average number of times an individual works out per week}
+#' \item{predominant_activity}{The activity most often used in a workout}
+#' \item{bp_systolic}{The average systolic blood pressure measurement of each individual}
+#' \item{bp_diastolic}{The average diastolic blood pressure measurement of each individual}
+#' \item{bmi}{The BMI of each individual}
+#' }
+"exercise_df"
+
+#' Principal Coordinates for Exercise Data
+#'
+#' Generated data for the purpose of package testing and function examples. This dataframe can be combined with
+#' the `exercise_df` as they have the same sample IDs. Note: this data is completely fake and was randomly generated
+#' in R based off of healthy ranges for each value. These samples were not obtained by sampling actual people or by running
+#' an actual UniFrac dissimilarity measurement.
+#'
+#' @format
+#' A dataframe with 100 rows and 3 columns:
+#' \describe{
+#' \item{sampleid}{IDs for each individual sample}
+#' \item{PC1}{Principal coordinates for the first axis}
+#' \item{PC2}{Principal coordinates for the second axis}
+#' }
+"dist_df"
+
+
+
 
 #' @source <https://github.com/madiapgar/diet_mouse_cdiff>

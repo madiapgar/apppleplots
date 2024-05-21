@@ -75,7 +75,7 @@ ex: new_facet_labs <- c('names',
 by desired metadata variables.
 }
 \examples{
-# example code
+# coming soon!
 
 
 }

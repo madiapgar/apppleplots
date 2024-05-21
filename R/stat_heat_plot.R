@@ -7,7 +7,8 @@
 #'
 #'
 #' @examples
-#' # example code
+#' # coming soon!
+#'
 #'
 #' @import magrittr
 #' @import ggplot2

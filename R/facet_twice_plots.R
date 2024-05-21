@@ -6,7 +6,7 @@
 #' and apply a log10 transformation to the y-axis. Best for use with longitudinal data.
 #'
 #' @examples
-#' # example code
+#' # coming soon!
 #'
 #' @import magrittr
 #' @import ggplot2

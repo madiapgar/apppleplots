@@ -63,6 +63,6 @@ ex: new_facet_labs <- c('names',
 to include p-value significance.
 }
 \examples{
-# example code
+# coming soon!
 
 }

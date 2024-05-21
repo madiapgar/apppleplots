@@ -59,6 +59,6 @@ ex: new_facet_labs <- c('names',
 transformation to the x and y-axis, and the line of best fit method is alterable.
 }
 \examples{
-# example code
+# coming soon!
 
 }

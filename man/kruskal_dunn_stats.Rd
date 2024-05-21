@@ -41,15 +41,16 @@ Post Hoc test results.
 }
 \examples{
 # extracting results from the named list
-\dontrun{
-kruskal_dunn_results <- kruskal_dunn_stats(input_table = my_table,
-                                           grouped_by = 'location',
-                                           adjust_method = 'BH',
-                                           filter_adj_p_value = TRUE,
-                                           formula_left = 'blood_sugar',
-                                           formula_right = 'sex')
-kruskal <- kruskal_dunn_results$KruskalTest
-dunn <- kruskal_dunn_results$DunnTest
-}
+krDunn_stat_list <- kruskal_dunn_stats(input_table = exercise_df,
+                                       grouped_by = c('location',
+                                                       'sex'),
+                                       multiple_groups = TRUE,
+                                       adjust_method = 'BH',
+                                       filter_adj_p_value = FALSE,
+                                       formula_left = 'heart_rate',
+                                       formula_right = 'predominant_activity')
+
+test_kruskal <- krDunn_stat_list$KruskalTest
+test_dunn <- krDunn_stat_list$DunnTest
 
 }

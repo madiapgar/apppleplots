@@ -82,6 +82,7 @@ ex: new_facet_labs <- c('names',
 Most compatible with pairwise or linear regression results.
 }
 \examples{
-# example code
+# coming soon!
+
 
 }
