@@ -1,0 +1,281 @@
+---
+title: "Madi's R Package Tutorial"
+output: html_document
+date: "2024-05-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+So you want to write your own R package? Join the club! I've included some of the basic steps to make your life easier in this R markdown file :) 
+
+Another great (and more detailed) resource is included here:
+https://r-pkgs.org/introduction.html
+
+An example GitHub repository for my package (apppleplots) is included here:
+https://github.com/madiapgar/apppleplots.git
+
+## **Creating your package**
+
+To get started, you'll need the `devtools` package, which is the major driving force behind the package setup and subsequent checks. 
+
+```{r, eval=FALSE}
+## if you need to install devtools
+install.packages("devtools")
+
+## you already have devtools installed
+library(devtools)
+```
+
+You'll need to call `devtools` every time you want to work on your package so I recommend adding the line of code below to your .Rprofile start up file. This will automatically load in `devtools` every time you open R/RStudio.
+
+```{r, eval=FALSE}
+if (interactive()) {
+  suppressMessages(require(devtools))
+}
+```
+
+Now that you have `devtools` installed you can actually create your package. Good news, there's a handy little function for that! You can either create a directory for your package and navigate there or just write the file path to where you want your package directory in the command. When you create your package it will probably restart your R session so you'll need to call `devtools` again (unless you added the handy command above to your .Rprofile). 
+
+```{r, eval=FALSE}
+## if you've already created the 'my_r_package' directory and navigated to it
+create_package()
+
+## your package directory will automatically be created this way
+create_package("~/path/to/my_r_package")
+```
+
+* **`create_package()` will automatically generate a number of files for you:**
+  + **.Rbuildignore - **anything you don't want run when you build your package goes here (it's similar
+    to .gitignore if you're familiar with that)
+  + **.gitignore - **anything you don't want uploaded to a git repository goes here (i.e. giant files
+    that will screw up your commits :))
+  + **DESCRIPTION - **provides metadata about your package and you can easily edit this (this is where     you put your package name and various other things)
+  + **NAMESPACE - **declares any package functions you want exported as well as any external functions     that you want imported (i.e. if you use tidyverse, ggplot2, rstatix, etc). You CANNOT edit this file      (`roxygen2` edits it for you).
+  + **R - **a directory that will soon contain .R script files for your package functions!
+  + **my_r_package.Rproj - **this will make your package directory an RStudio project automatically        (which I highly recommend)
+  + **man - **a directory that will soon contain documentation .Rd files written by `roxygen2`. Don't      worry if it hasn't been created yet, when you write your first bit of documentation it will be            automatically generated. 
+  + **data - **a directory that contains any data you want included with your package as an .rda           object. 
+
+OPTIONAL: Making your package directory into a git repository (I also highly recommend this!). 
+
+```{r, eval=FALSE}
+## this sets up your GitHub repo for you 
+## you can also set up your repo a different way (like I did because I didn't know this command existed lol)
+use_git()
+```
+ 
+
+## **Commands you'll call several times a day**
+
+Now that you've successfully created your package, you can start writing helpful functions for the benefit of everyone! Each function you write needs to go in it's own .R file under the `R/` directory that we talked about above. If your function has supporting functions, those can go in the same .R file, otherwise, it's best to keep everything in their own .R files or else things get realllly confusing (for you and the computer).
+
+The good thing is that there's another super handy function that will automatically create .R files for you called `use_r()` (you can also just create them the usual way in RStudio, it's whichever you prefer). If the .R file you want has already been created, `use_r()` will just open that file for you.
+
+```{r, eval=FALSE}
+## function
+my_handy_function <- function(name){
+  welcome <- paste(name, "says hello world!", sep = " ")
+  print(welcome)
+}
+
+## creating a .R file for my function
+use_r("my_handy_function")
+```
+
+Now, say that you put `my_handy_function()` in the `R/my_handy_function.R` script and you want to test out how it works without actually building your package yet. You can run `devtools::load_all()` to load `my_handy_function()` into your global environment for experimentation (I highly recommend doing this and testing your functions before you build your package). Every time you update `my_handy_function()` you will need to rerun `devtools::load_all()` for the updates to be reflected.
+
+```{r, eval=FALSE}
+## automatically loads in all created/updated functions 
+devtools::load_all()
+```
+
+When you have tweaked `my_handy_function()` enough that it's running with no errors, you will want the additional confirmation that your R code is set up correctly. `devtools::check()` will be insanely helpful in easing your mind in verifying that your R code is kosher and won't cause problems for you or others when you build your package. I recommend dealing with any errors and warnings asap instead of letting them build up over time (because then you have to spend a week debugging your package...not speaking from experience or anything). 
+
+NOTE: If you eventually want to upload your package to CRAN, your `check()` output will need to have 0 errors, warnings, and notes!
+
+```{r, eval=FALSE}
+## the output file of this command will give you any errors, warnings, and/or notes generated
+## by running the code in your package
+## you will be running this command A LOT
+devtools::check()
+```
+
+Any good programmer knows that code documentation is essential and the `devtools::document()` command knows that too. `devtools::document()` updates all dependencies in your NAMESPACE file and all `roxygen2` documentation for your functions/data (we'll go over `roxygen2` in a little bit). 
+
+```{r, eval=FALSE}
+devtools::document()
+```
+
+## **DESCRIPTION file specifics**
+
+Your DESCRIPTION file contains all of your package metadata (aka important user information). An example of a DESCRIPTION file is like so: 
+
+```
+Package: my_r_package
+Type: Package
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Maintainer: The package maintainer <your email goes here>
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Depends:
+    R (>= 2.10)
+Imports:
+    Imported packages go here
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+```
+
+To add a package to Imports: in your DESCRIPTION file, run `usethis::use_package()`.
+
+```{r, eval=FALSE}
+## I'd recommend calling the exact package you want instead of large packages like tidyverse
+## dplyr, readr, and magrittr have many of the tidyverse commands that commonly used 
+usethis::use_package("dplyr")
+```
+
+
+## **Function and data documentation**
+
+I've mentioned `roxygen2` several times so far and you're probably wondering what it's deal is. Well, `roxygen2` is the package that helps you document basically everything in your package and sort out your dependencies (which are kind of important). If you don't already have `roxygen2` installed, I would do so now.
+
+```{r, eval=FALSE}
+install.packages("roxygen2")
+
+## calling newly installed package
+library(roxygen2)
+```
+
+Now let's bring back `my_handy_function()` from above to add some documentation to it! For reference, the documentation that you write is what users will see when they type `?my_handy_function()` so I'd make sure that you're being clear in what you write here. Pretend that the code chunk below is what your `R/my_handy_function.R` file looks like.
+
+```{r, eval=FALSE}
+## roxygen2 comment lines start with #' 
+#' Brief overview of what my_handy_function() does
+#' 
+#' @description 
+#' The written description of my_handy_function() for users
+#' 
+#' @examples
+#' Example code of how to run my_handy_function(), be careful with your example code
+#' because it's run when you load/check/build your package and can't error out. Using dummy or 
+#' common datasets for example demonstrations is highly recommended. 
+#' 
+#' @import dplyr
+#' @export my_handy_function
+#' @param name Insert your name as a string, or any string of choice
+#' 
+my_handy_function <- function(name){
+  welcome <- paste(name, "says hello world!", sep = " ")
+  print(welcome)
+}
+```
+
+* **Some notes on `roxygen2` commands:**
+  + **@description - **is the description of what your function does and ideal usage.
+  + **@example - **is where you included examples of how to use your function for user reference. A slight warning here, any code you put under `@example` will be run when you load/check/build your package and CANNOT error out. 
+  + **@import/@importFrom - **is where you need to include any external packages/functions that will need to be imported to run your code. These are your dependencies and will be automatically written into your NAMESPACE file when you run `devtools::document()`. You will need to include your imports in your DESCRIPTION file like I talked about above. I HIGHLY recommend using `@importFrom` to call the specific function from an external package that you want to use instead of the whole package (this is just more exact and prevents issues of overlapping dependencies).
+  + **@export - **is where you put the name of your function. This will ensure that your exported function is written to your NAMESPACE and ultimately included in your package when you build it.
+  + **@param - **is where you will place all inputs to your function followed by a description of what the input is/does. I also like to include what form the input needs to be in and any preset defaults here (i.e. does your function expect a dataframe or string for this input? do you have any inputs preset to a default value? if so, what is it?).
+
+There are various other `roxygen2` commands that could be useful to you and I'd recommend looking them up if you're interested. 
+
+When you're satisfied with your documentation, you can run `devtools::document()`. The first time you run the command, a `my_handy_function.Rd` file will be generated in the `man/` directory. This is where all your package documentation goes and you CANNOT edit those files. If you want to edit your documentation, you can do so in the specific .R file associated with the function and rerun `devtools::document()`. 
+
+If you include any additional data like dataframes, plots, etc. with your package you will need to document those as well (if you forget, don't worry, `devtools::check()` will happily remind you). Since you won't have any R/.R files for your data, will need to create one called `data.R`. This .R file basically directs your computer towards any documentation associated with your package data. An example of what that file might look like is in the code chunk below.
+
+```{r, eval=FALSE}
+## Dummy data set documentation (this is a dataframe)
+## title
+#' Exercise Data
+#'
+## description
+#' Generated data for the purpose of package testing and function examples. Note: this data is completely
+#' fake and was randomly generated in R based off of healthy ranges for each value. These samples were not
+#' obtained by sampling actual people.
+#'
+#' @format
+#' A dataframe with 100 rows and 10 columns:
+#' \describe{
+#' \item{sampleid}{IDs for each individual sample}
+#' \item{sex}{Sex of each individual}
+#' \item{location}{The state the individual lives in}
+#' \item{heart_rate}{The average resting heart rate of each individual}
+#' \item{exercise_mins}{The average amount of time spent exercising per workout (in minutes)}
+#' \item{exercise_weekly}{The average number of times an individual works out per week}
+#' \item{predominant_activity}{The activity most often used in a workout}
+#' \item{bp_systolic}{The average systolic blood pressure measurement of each individual}
+#' \item{bp_diastolic}{The average diastolic blood pressure measurement of each individual}
+#' \item{bmi}{The BMI of each individual}
+#' }
+"exercise_df"
+```
+
+**@format** is this most important part of this documentation because it tells your user what the included data actually is. In this examples case, it's a dummy dataframe. Since it's a dataframe, we also need to include the name of each column and what data is in said column in the documentation like so: 
+\describe{
+\item{column_name}{description of column contents}
+}
+
+At the end of the documentation, you'll need to include the the name of the data you're describing as it's written in your `data/` directory. In this examples case, the dummy dataframe was saved under `data/exercise_df.rda` so at the end of the documentation its name is included as a string ("exercise_df"). 
+
+## **R/.R file function specifics**
+
+I wanted to help you guys out and include some of the lessons I've learned about how to write functions for your package after a painfully long amount of time. Now, the `my_handy_function()` example I've included above is pretty basic and can be run through base R meaning that I don't really need to specify any external dependencies for that function. However, more often than not you'll be referencing external packages/functions to generate the code in your R/.R files. I've included a more complicated example in the code chunk below:
+
+```{r, eval=FALSE}
+#' Will do a silly thing to your dataframe
+#' 
+#' @description 
+#' `do_a_silly_thing()` will add a silly_column to your dataframe. If the row number is even, the 
+#' silly_column will say "I can't even" but if the row number is odd, it will say "I'm so odd". 
+#' 
+#' @examples
+#' Example code of how to run `do_a_silly_thing()`, be careful with your example code
+#' because it's run when you load/check/build your package and can't error out. Using dummy or 
+#' common datasets for example demonstrations is highly recommended. 
+#' 
+#' @importFrom dplyr mutate
+#' @importFrom dplyr row_number
+#' @import magrittr
+#' @export do_a_silly_thing
+#' @param input_table Expects a tibble or dataframe to add a column to. 
+do_a_sily_thing <- function(input_table){
+  out_table <- input_table %>% 
+                dplyr::mutate(silly_column = ifelse(dplyr::row_number(input_table) %% 2 == 0, 
+                                             paste("I can't even"),
+                                             paste("I'm so odd")))
+  return(out_table)
+}
+```
+
+You'll probably notice that I've used the pipe sign (%>%) from `magrittr` and `mutate()` and `row_number()` functions from `dplyr` in this function. Because I'm using functions from `magrittr` and `dplyr`, I need to tell the computer the correct external functions to use to run my function. Since I only need the `mutate()` and `row_number()` functions from `dplyr`, I can include those under `@importFrom`. Unfortunately, I need to `@import` all of `magrittr` since the pipe (%>%) is a symbol and I can't directly call it.  
+
+## **The data-raw/ directory**
+
+Let's say that you've successfully written some functions and you want to test them out or that you have some code that you don't want included when you build your package. This is where a `data-raw` directory comes in handy. Since you don't want anything in `data-raw` included when you build your package, you'll need list the directory in your .Rbuildignore file. 
+
+I like to include any .R files needed to create dummy data or to read in my ggplot .rda objects in this folder since I don't want that code run every time I build my package nor do I want users to have access to them. Honestly, you can put anything you want in your `data-raw` directory, as long as it's included in your .Rbuildignore file. 
+
+## **The final steps**
+
+Congratulations!! You've made it through my extremely basic tutorial/info-sheet on how to write your own R package. At this point, you probably have some sort of bare-bones package written and you've been able to run `devtools::load_all()` and `devtools::check()` without any errors or warnings. This means its time to build you initial package! You can easily do this using `devtools::install()` or by navigating to the "Build" tab in the top right panel of your RStudio where you can then click "install". This will install your package to your local computer for your usage!
+
+```{r, eval=FALSE}
+devtools::install()
+```
+
+If you've synced your package directory with a GitHub repository, you can include the instructions below for others to install it via GitHub (if you want your package available via CRAN, that's a bit more complicated and a conversation for another time).
+
+```{r, eval=FALSE}
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")} devtools::install_github("your_userName/my_r_package")
+```
+
+
+
+
