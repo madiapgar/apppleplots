@@ -2,6 +2,14 @@
 
 This repository contains an R package created to easily pull/manipulate visualizations and commonly used functions in association with [this study](https://github.com/madiapgar/diet_mouse_cdiff). 
 
+## Installation
+
+```R
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+
+devtools::install_github("madiapgar/apppleplots")
+```
+
 ## Functions
 
 `correlation_plots()` - returns a plot faceted by two variables, gives you the option to apply a log10 transformation to the x and y-axis, and the line of best fit method is alterable.
@@ -18,6 +26,3 @@ This repository contains an R package created to easily pull/manipulate visualiz
 
 `linear_model()` - returns a dataframe with results of your linear regression analysis.
 
-## Installation
-
-`if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")} devtools::install_github("madiapgar/apppleplots")`
