@@ -86,6 +86,7 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/posters/cfus_bloodOnly.rdat")
     load("~/projects/diet_mouse_cdiff/posters/mini_bloodCulture_abun.rdat")
     load("~/projects/diet_mouse_cdiff/figures/cecum_histo_percent.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/noDiet_histoCecum_tox_plot.rdat")
 
     ## adding data files to project data directory to be loaded in later
     ## creating a named list of them
@@ -154,13 +155,15 @@ load_data <- function(update){
                        hypoxia_locationDiet_plot = hypoxia_locationDiet_plot,
                        hypoxia_dietLocation_plot = hypoxia_dietLocation_plot,
                        hypox_colonStats_plot = hypox_colonStats_plot,
+                       hypox_cecumHisto_plot = hypox_cecumHisto_plot,
                        cecum_histo_plot = cecum_histo_plot,
                        colon_histo_plot = colon_histo_plot,
                        genus_plot1 = genus_plot1,
                        mini_neat_cecumHisto_stats_plot = mini_neat_cecumHisto_stats_plot,
                        colony_bloodOnly_plot = colony_bloodOnly_plot,
                        poster_abun2 = poster_abun2,
-                       histo_perc_plot = histo_perc_plot)
+                       histo_perc_plot = histo_perc_plot,
+                       noDiet_histoCecum_tox_plot = noDiet_histoCecum_tox_plot)
 
 
     ## going through the named list I created above
@@ -178,4 +181,7 @@ load_data <- function(update){
   }
 }
 
-load_data(update = FALSE)
+## 10-15-2024 UPDATE: had to regenerate and load all .rdat plots because of a ggplot2/ggside
+## and cowplot package update. Need to keep an eye out for this in the future!!
+## it was really annoying
+load_data(update = TRUE)

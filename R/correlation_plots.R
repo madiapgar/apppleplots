@@ -48,16 +48,30 @@ correlation_plots <- function(input_table,
             ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
             ggplot2::geom_jitter(alpha = point_alpha, width = 0.1, height = 0) +
             ggplot2::geom_smooth(method = regression_method, se = FALSE) +
-            ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
-                                cols = vars(.data[[facet_cols]]),
-                                labeller = labeller(.rows = row_labs,
-                                                    .cols = col_labs),
-                                scales = 'free_y') +
             ggplot2::theme_bw() +
             ggplot2::theme(strip.text.y = element_text(angle = 0)) +
             ggplot2::labs(x = x_name,
                           y = y_name,
                           title = title_content)
+
+  if (is.character(facet_rows) & is.character(facet_cols)) {
+    plot <- plot + ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
+                                       cols = vars(.data[[facet_cols]]),
+                                       labeller = labeller(.rows = row_labs,
+                                                           .cols = col_labs),
+                                       scales = 'free_y')
+  } else {
+    if (is.null(facet_cols)) {
+      plot <- plot + ggplot2::facet_grid(rows = vars(.data[[facet_rows]]),
+                                         labeller = labeller(.rows = row_labs),
+                                         scales = 'free_y')
+    } else {
+      plot <- plot + ggplot2::facet_grid(cols = vars(.data[[facet_cols]]),
+                                         labeller = labeller(.cols = col_labs),
+                                         scales = 'free_y')
+    }
+  }
+
 
   if (x_transform == TRUE) {
     plot <- plot + ggplot2::scale_x_continuous(trans = 'log10')
