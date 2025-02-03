@@ -34,7 +34,8 @@ correlation_plots(
 
 \item{point_alpha}{Enter a numeric value between 0 and 1 to change the transparency of your points, default is 0.4}
 
-\item{regression_method}{Defines which line of best fit method you want, default is 'lm'}
+\item{regression_method}{Defines which line of best fit method you want
+(options: 'lm', 'glm', 'gam', 'loess', or 'none'), default is 'lm'}
 
 \item{facet_rows}{The column name that you want to facet your plot ROWS by (as a string)}
 

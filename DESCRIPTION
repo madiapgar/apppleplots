@@ -1,7 +1,7 @@
 Package: apppleplots
 Type: Package
 Title: Example plots and associated functions to create them
-Version: 0.1.1
+Version: 0.1.2
 Author: Madi Apgar
 Maintainer: The package maintainer <madison.apgar@cuanschutz.edu>
 Description: This package contains all generated plots for the study on the effects of dietary fiber
@@ -23,7 +23,7 @@ Imports:
     stats,
     dplyr,
     rstatix
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

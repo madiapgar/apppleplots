@@ -69,9 +69,6 @@ stat_heat_plot <- function(input_table,
             ggplot2::geom_text(aes(label = .data[[text_value]])) +
             ggplot2::scale_fill_gradient2(low = low_color,
                                           high = high_color) +
-            ggplot2::facet_wrap(~.data[[facet_by]],
-                                labeller = labeller(.cols = facet_labels),
-                                scales = 'free_x') +
             ggplot2::theme_bw() +
             ggplot2::xlab(x_name) +
             ggplot2::ylab(y_name) +
@@ -97,6 +94,16 @@ stat_heat_plot <- function(input_table,
       plot <- plot + ggplot2::scale_y_continuous(breaks = y_labels)
     }
   }
+
+
+  if (is.character(facet_by)) {
+    plot <- plot + ggplot2::facet_grid(~.data[[facet_by]],
+                                       labeller = labeller(.cols = facet_labels),
+                                       scales = "free_x")
+  } else {
+    plot
+  }
+
 
   if (pairwise == TRUE) {
     plot <- plot +

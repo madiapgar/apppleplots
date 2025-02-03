@@ -54,8 +54,6 @@ facet_once_plots <- function(input_table,
             ggplot2::geom_boxplot(aes(group = .data[[grouped_by]])) +
             ggplot2::geom_jitter(alpha = point_alpha, width = 0.1, height = 0) +
             ggplot2::theme_bw() +
-            ggplot2::facet_grid(~.data[[facet_by]],
-                                labeller = labeller(.cols = facet_labels)) +
             ggplot2::labs(x = x_name,
                           y = y_name,
                           title = title_content)
@@ -69,6 +67,15 @@ facet_once_plots <- function(input_table,
       plot <- plot + ggplot2::scale_x_continuous(breaks = x_labels)
     }
   }
+
+
+  if (is.character(facet_by)) {
+    plot <- plot + ggplot2::facet_grid(~.data[[facet_by]],
+                                       labeller = labeller(.cols = facet_labels))
+  } else {
+    plot
+  }
+
 
   if (stat_on_plot == 'TRUE') {
     plot <- plot + ggpubr::stat_pvalue_manual(stat_table,

@@ -87,6 +87,23 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/posters/mini_bloodCulture_abun.rdat")
     load("~/projects/diet_mouse_cdiff/figures/cecum_histo_percent.rdat")
     load("~/projects/diet_mouse_cdiff/figures/noDiet_histoCecum_tox_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/alphaDiv_microbeProd_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/relAbun_microbeProd_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/panelC_fig3_redo.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/panelE_fig3_redo.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/butyrateOnly_metab.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/dcaSep_overall_bileAcid.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/miniComparison_diet_genusAbun_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/miniComparison_vendor_genusAbun_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/miniComparison_genusAbun_stat_vis.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/allExp_culture_withMicrobes.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/allExp_culture_withMicrobes_stats.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/genusAbun_plots_together_withLabs.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/lachno_abun_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/rumino_abun_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/pathogen_abun_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/noButyrate_metab.rdat")
+
 
     ## adding data files to project data directory to be loaded in later
     ## creating a named list of them
@@ -117,10 +134,10 @@ load_data <- function(update){
                        family_abun1 = family_abun1,
                        stat_plot1 = stat_plot1,
                        surv_stat_vis = surv_stat_vis,
-                       tox_acetic = tox_acetic,
-                       tox_butanoic = tox_butanoic,
+                       tox_acetic_stats = tox_acetic_stats,
+                       tox_butanoic_stats = tox_butanoic_stats,
                        tox_metab_stat_vis = tox_metab_stat_vis,
-                       tox_propanoic = tox_propanoic,
+                       tox_propanoic_stats = tox_propanoic_stats,
                        unweighted_pcoa = unweighted_pcoa,
                        uu_homog_plot = uu_homog_plot,
                        uu_homog_stat_vis = uu_homog_stat_vis,
@@ -163,7 +180,24 @@ load_data <- function(update){
                        colony_bloodOnly_plot = colony_bloodOnly_plot,
                        poster_abun2 = poster_abun2,
                        histo_perc_plot = histo_perc_plot,
-                       noDiet_histoCecum_tox_plot = noDiet_histoCecum_tox_plot)
+                       ## plots below don't have documentation filled out yet!!
+                       noDiet_histoCecum_toxStats_plot = noDiet_histoCecum_toxStats_plot,
+                       faith_combStats_plot = faith_combStats_plot,
+                       microbeProd_relAbunStats_plot = microbeProd_relAbunStats_plot,
+                       panelC_fig3_redoWithlab = panelC_fig3_redoWithlab,
+                       panelE_fig3_redoWithlab = panelE_fig3_redoWithlab,
+                       butyrateOnly_plot = butyrateOnly_plot,
+                       dca_sep_plot = dca_sep_plot,
+                       miniVendor_genusAbun_plot = miniVendor_genusAbun_plot,
+                       miniDiet_genusAbun_plot = miniDiet_genusAbun_plot,
+                       mini_d3_genus_relAbun_stat_plot = mini_d3_genus_relAbun_stat_plot,
+                       everything_plot = everything_plot,
+                       everything_stats = everything_stats,
+                       genusAbun_plots_together_withLabs = genusAbun_plots_together_withLabs,
+                       lachno_abun_plot = lachno_abun_plot,
+                       rumino_abun_plot = rumino_abun_plot,
+                       path_abun_plot = path_abun_plot,
+                       notButy_plot = notButy_plot)
 
 
     ## going through the named list I created above
