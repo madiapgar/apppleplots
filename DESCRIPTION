@@ -1,7 +1,7 @@
 Package: apppleplots
 Type: Package
 Title: Example plots and associated functions to create them
-Version: 0.1.2
+Version: 1.1.3
 Author: Madi Apgar
 Maintainer: The package maintainer <madison.apgar@cuanschutz.edu>
 Description: This package contains all generated plots for the study on the effects of dietary fiber

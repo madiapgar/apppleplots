@@ -9,29 +9,6 @@ NULL
 #' @format ggplot object
 "all_day_plot"
 
-#' baiH Plot
-#'
-#' Fecal stool sample baiH functional potential (secondary bile acid producer) across
-#' experimental timeline.
-#'
-#' @format ggplot object
-"baiH"
-
-#' baiH Statistical Results Plot
-#'
-#' Non-parametric ANOVA statistical results for baiH plot.
-#'
-#' @format ggplot object
-"baiH_plot"
-
-#' baiI Plot
-#'
-#' Fecal stool sample baiI functional potential (secondary bile acid producer) across
-#' experimental timeline.
-#'
-#' @format ggplot object
-"baiI"
-
 #' Bile Acid Concentration Plot
 #'
 #' Cecal sample primary and secondary bile acid concentrations at the last day of the
@@ -40,35 +17,12 @@ NULL
 #' @format ggplot object
 "bile_plot"
 
-#' Buk Statistical Results Plot
+#' Cecal Concentration of Butyrate
 #'
-#' Non-parametric ANOVA statistical results for butyrate kinase plot.
-#'
-#' @format ggplot object
-"buk_plot"
-
-#' But Statistical Results Plot
-#'
-#' Non-parametric ANOVA statistical results for butyryl-coA transferase plot.
+#' Cecal butyrate concentrations at day 3 for all diets. This is a shortened version of `metab_plot`.
 #'
 #' @format ggplot object
-"but_plot"
-
-#' Butyrate Kinase Plot
-#'
-#' Fecal stool sample butyrate kinase (buk) functional potential (butyrate producer) across
-#' experimental timeline.
-#'
-#' @format ggplot object
-"butyrate_kinase"
-
-#' Butyryl CoA Transferase Plot
-#'
-#' Fecal stool sample butyryl-coA-transferase (but) functional potential (butyrate producer) across
-#' experimental timeline.
-#'
-#' @format ggplot object
-"butyryl_coa_transferase"
+"butyrateOnly_plot"
 
 #' Cecal Hypoxia and Histopathology Score Correlation Plot
 #'
@@ -123,6 +77,14 @@ NULL
 #' @format ggplot object
 "colony_bloodOnly_plot"
 
+#' Cecal Bile Acid Concentration
+#'
+#' Cecal DCA (secondary bile acid), C. difficile inhibiting bile acid, and C. difficile promoting
+#' bile acid concentrations at day 3. P-value significance is overlaid on the plot.
+#'
+#' @format ggplot object
+"dca_sep_plot"
+
 #' Mouse Survival Plot
 #'
 #' Survival results per diet for the experiment.
@@ -130,12 +92,22 @@ NULL
 #' @format ggplot object
 "diet_plot_final"
 
-#' Cecal Diluted Toxin Concentration Plot
+#' New Experiment Positive Culture and Survival Results
 #'
-#' Cecal diluted toxin concentrations at the last day of the experimental timeline.
+#' A summary plot of positive culture results per anatomical location (spleen, liver, or blood) at day 3
+#' combined with whether the associated mouse survived or not. Also includes the microbes found in the
+#' positive cultures.
 #'
 #' @format ggplot object
-"dil_plot"
+"everything_plot"
+
+#' New Experiment Positive Culture and Survival Statistical Results
+#'
+#' Non-parametric ANOVA pairwise comparisons associated with `everything_plot`. Done between diets and
+#' vendors for positive culture and/or survival.
+#'
+#' @format ggplot object
+"everything_stats"
 
 #' Faith's PD Plot (Alpha Diversity)
 #'
@@ -151,12 +123,29 @@ NULL
 #' @format ggplot object
 "faith_stat_vis"
 
+#' Cecal Microbiome Faith's PD Correlated to DCA and Butyrate Concentrations
+#'
+#' Cecal microbiome Faith's PD at day 3 correlated with DCA (secondary bile acid) and butyrate concentrations
+#' at the same time point. Significant p-values and r2 values are overlaid on the plot. Points are
+#' colored by diet rather than being faceted.
+#'
+#' @format ggplot object
+"faith_combStats_plot"
+
 #' Microbe Family Relative Abundance Plot
 #'
 #' Fecal stool sample microbe relative abundances across experimental timeline, sectioned out by Family.
 #'
 #' @format ggplot object
 "family_abun1"
+
+#' Microbe Genus Relative Abundance Plot
+#'
+#' Fecal stool sample microbe relative abundances across experimental timeline, sectioned out by Genus.
+#' Includes obligate anaerobes and potential pathogens. Faceted by diet.
+#'
+#' @format ggplot object
+"genusAbun_plots_together_withLabs"
 
 #' Microbe Genera Relative Abundance Plot
 #'
@@ -165,14 +154,6 @@ NULL
 #' @format ggplot object
 "genus_plot1"
 
-#' Acetate Concentration and Histopathology Score Correlation Plot
-#'
-#' Cecal concentrations of acetate (acetic acid) correlated with cecal and colonic histopathology scores at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"histo_acetic_plot"
-
 #' Bile Acid Concentration and Histopathology Score Correlation Statistical Results Plot
 #'
 #' Cecal bile acid concentrations correlated with cecal and colonic histopathology scores statistical
@@ -180,14 +161,6 @@ NULL
 #'
 #' @format ggplot object
 "histo_bile_stat_plot"
-
-#' Butyrate Concentration and Histopathology Score Correlation Plot
-#'
-#' Cecal concentrations of butyrate (n-butanoic acid) correlated with cecal and colonic histopathology scores at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"histo_butanoic_plot"
 
 #' Bile Acid Inhibitors and Histopathology Score Correlation Plot
 #'
@@ -229,14 +202,6 @@ NULL
 #' @format ggplot object
 "histo_promoters_plot"
 
-#' Propanoate Concentration and Histopathology Score Correlation Plot
-#'
-#' Cecal concentrations of propanoate (propanoic acid) correlated with cecal and colonic histopathology scores at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"histo_propanoic_plot"
-
 #' Bile Acid Ratio and Histopathology Score Correlation Plot
 #'
 #' Cecal bile acid promoter:inhibitor ratios correlated with cecal and colonic histopathology scores
@@ -253,27 +218,12 @@ NULL
 #' @format ggplot object
 "histo_ratio_stat_plot"
 
-#' Hypoxia and Histopathology Score Correlation Plot (in the cecum ONLY)
-#'
-#' Cecal histopathology scores correlated with cecal hypoxia fluorescence levels
-#' at the last day of the experimental timeline.
-#'
-#' @format ggplot object
-"hypox_cecum_plot"
-
-#' Cecal Hypoxia Plot (diet on x-axis, faceted by GI location)
+#' Cecalk Hypoxia Levels
 #'
 #' Cecal hypoxia fluorescence levels at the last day of the experimental timeline.
 #'
 #' @format ggplot object
-"hypox_cecumLocation_plot"
-
-#' Colon Hypoxia Plot (diet on x-axis, faceted by GI location)
-#'
-#' Colonic hypoxia fluorescence levels at the last day of the experimental timeline.
-#'
-#' @format ggplot object
-"hypox_colonLocation_plot"
+"hypoxia_cecum_plot"
 
 #' Hypoxia and Histopathology Score Correlation Plot (in the colon ONLY)
 #'
@@ -282,13 +232,6 @@ NULL
 #'
 #' @format ggplot object
 "hypox_colonStats_plot"
-
-#' Hypoxia Plot (diet on x-axis, faceted by GI location)
-#'
-#' Hypoxia fluorescence levels at the last day of the experimental timeline.
-#'
-#' @format ggplot object
-"hypox_location_plot"
 
 #' Hypoxia and TcdA Toxin Correlation Plot
 #'
@@ -328,12 +271,13 @@ NULL
 #' @format ggplot object
 "hypoxia_locationDiet_plot"
 
-#' Hypoxia Plot (diet fiber level on x-axis, faceted by GI location)
+#' Lachnospiraceae Relative Abundance Plot
 #'
-#' Hypoxia fluorescence levels at the last day of the experimental timeline.
+#' Features the top five most abundant genera in Lachnospiraceae and follows their relative
+#' abundance throughout the experimental timeline, faceted by diet. Is a plot in `genusAbun_plots_together_withLabs`.
 #'
 #' @format ggplot object
-"location_fib_plot"
+"lachno_abun_plot"
 
 #' Metabolite and Bile Acid Concentration Correlation Statistical Results Plot
 #'
@@ -377,6 +321,15 @@ NULL
 #' @format ggplot object
 "metab_stat_vis"
 
+#' Cecal Microbiome Relative Abundances Correlated to DCA and Butyrate Concentrations
+#'
+#' Cecal microbiome relative abundances of key families and genera at day 3 compared to concentrations
+#' of DCA and butyrate at the same day. Significant p-values and r2 values are overlaid on the plot.
+#' Points are colored by diet rather than being faceted.
+#'
+#' @format ggplot object
+"microbeProd_relAbunStats_plot"
+
 #' Cecal Toxin and Histopathology Score Correlation Plot (mini version)
 #'
 #' Cecal toxin concentrations correlated with cecal histopathology scores at the last day of
@@ -385,6 +338,33 @@ NULL
 #'
 #' @format ggplot object
 "mini_neat_cecumHisto_stats_plot"
+
+#' All Experiment Comparison Relative Abundance Plot (colored by diet)
+#'
+#' Comparison of the relative abundance of potential pathogenic genera at days -15 and 3 between sets
+#' of experiments done (Old Anschutz (2020), U of Arizona, New Anschutz (2024)). Points are colored by
+#' diet for comparison between experiments.
+#'
+#' @format ggplot object
+"miniDiet_genusAbun_plot"
+
+#' All Experiment Comparison Relative Abundance Stats Plot (between experiment and vendor)
+#'
+#' Pairwise comparison statistics associated with the relative abundance of potential pathogenic genera
+#' at days -15 and 3 between sets of experiments done (Old Anschutz (2020), U of Arizona, New Anschutz (2024)).
+#' Done via non-parametric ANOVA.
+#'
+#' @format ggplot object
+"mini_d3_genus_relAbun_stat_plot"
+
+#' All Experiment Comparison Relative Abundance Plot (colored by vendor)
+#'
+#' Comparison of the relative abundance of potential pathogenic genera at days -15 and 3 between sets
+#' of experiments done (Old Anschutz (2020), U of Arizona, New Anschutz (2024)). Points are colored by
+#' mouse vendor since it differed based on experiment.
+#'
+#' @format ggplot object
+"miniVendor_genusAbun_plot"
 
 #' Cecal Toxin and Histopathology Score Correlation Plot (full version)
 #'
@@ -418,6 +398,38 @@ NULL
 #' @format ggplot object
 "neat_tox_stat_vis"
 
+#' New Experiment Average Percent Change in Mouse Weight Plot
+#'
+#' Average percent change in mouse weight by diet and vendor in the days post infection with C. difficile.
+#' Associated with New Anschutz experiments.
+#'
+#' @format ggplot object
+"newExp_avWeight_plot"
+
+#' New Experiment Survival Plot
+#'
+#' Mouse survival curves by diet and vendor in the days post infection with C. difficile.
+#' Associated with New Anschutz experiments.
+#'
+#' @format ggplot object
+"newExp_dietVendor_surv_plot"
+
+#' Toxin and Histopathology Score Correlation Plot (not faceted by diet)
+#'
+#' Cecal toxin concentrations (TcdA and TcdB) correlated with histopathology score. Significant p-values
+#' and r2 values are overlaid on the plot. Points are colored by diet rather than being faceted.
+#'
+#' @format ggplot object
+"noDiet_histoCecum_toxStats_plot"
+
+#' Cecal Concentration of Acetate and Propionate
+#'
+#' Cecal acetate and propionate concentrations at day 3 for all diets. This is a shortened version
+#' of `metab_plot`, its final third is `butyrateOnly_plot`.
+#'
+#' @format ggplot object
+"notButy_plot"
+
 #' Bile Acid Concentration Plot (promoters and inhibitors ONLY)
 #'
 #' Cecal sample primary and secondary bile acid concentrations at the last day of the
@@ -425,6 +437,32 @@ NULL
 #'
 #' @format ggplot object
 "overall_plot"
+
+#' Cecal DCA Concentration Correlated to Toxin and Histopathology Results
+#'
+#' Cecal DCA concentration at day 3 compared to C. difficile toxins (TcdA/TcdB) and cecal histopathology
+#' scores at the same time point. Significant p-values and r2 values are overlaid on the plot.
+#' Points are colored by diet rather than being faceted.
+#'
+#' @format ggplot object
+"panelC_fig3_redoWithlab"
+
+#' Cecal Butyrate Concentration Correlated to Toxin and Histopathology Results
+#'
+#' Cecal butyrate concentration at day 3 compared to C. difficile toxins (TcdA/TcdB) and cecal histopathology
+#' scores at the same time point. Significant p-values and r2 values are overlaid on the plot.
+#' Points are colored by diet rather than being faceted.
+#'
+#' @format ggplot object
+"panelE_fig3_redoWithlab"
+
+#' Potential Pathogen Relative Abundance Plot
+#'
+#' Features five potential pathogen genera and follows their relative abundance throughout the experimental
+#' timeline, faceted by diet. Is a plot in `genusAbun_plots_together_withLabs`.
+#'
+#' @format ggplot object
+"path_abun_plot"
 
 #' Microbe Family Relative Abundance Plot (mini version)
 #'
@@ -456,13 +494,13 @@ NULL
 #' @format ggplot object
 "ratio_bile_plot"
 
-#' Microbe Family Relative Abundance Plot (manuscript version)
+#' Ruminococcaeae Relative Abundance Plot
 #'
-#' Fecal stool sample microbe relative abundances across experimental timeline, sectioned out by Family.
-#' This version is used in a figure in the paper manuscript.
+#' Features the top four most abundant genera in Ruminococcaceae and follows their relative
+#' abundance throughout the experimental timeline, faceted by diet. Is a plot in `genusAbun_plots_together_withLabs`.
 #'
 #' @format ggplot object
-"short_abun1"
+"rumino_abun_plot"
 
 #' Microbe Family Relative Abundance Statistical Results Plot (manuscript version)
 #'
@@ -479,14 +517,6 @@ NULL
 #' @format ggplot object
 "surv_stat_vis"
 
-#' Acetate and Toxin Concentration Correlation Plot
-#'
-#' Cecal concentrations of acetate (acetic acid) correlated with toxin (TcdA and TcdB) concentrations at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"tox_acetic"
-
 #' Toxin and Bile Acid Concentration Correlation Statistical Results Plot
 #'
 #' Cecal toxin concentrations (TcdA and TcdB) correlated with cecal bile acid concentrations statistical
@@ -495,14 +525,6 @@ NULL
 #' @format ggplot object
 "tox_bile_stat_plot"
 
-#' Butyrate and Toxin Concentration Correlation Plot
-#'
-#' Cecal concentrations of butyrate (n-butanoic acid) correlated with toxin (TcdA and TcdB) concentrations at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"tox_butanoic"
-
 #' Toxin and Metabolite Concentration Correlation Statistical Results Plot
 #'
 #' Cecal toxin concentrations (TcdA and TcdB) correlated with cecal metabolite concentrations (acetic acid, n-butanoic acid, and propanoic acid)
@@ -510,14 +532,6 @@ NULL
 #'
 #' @format ggplot object
 "tox_metab_stat_vis"
-
-#' Propanoate and Toxin Concentration Correlation Plot
-#'
-#' Cecal concentrations of propanoate (propanoic acid) correlated with toxin (TcdA and TcdB) concentrations at the
-#' last day of the experimental timeline.
-#'
-#' @format ggplot object
-"tox_propanoic"
 
 #' Toxin and Bile Acid Inhibitors Correlation Plot
 #'

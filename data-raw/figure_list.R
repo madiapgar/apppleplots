@@ -6,14 +6,7 @@ load_data <- function(update){
 
   if (update == TRUE) {
     ## putting all of my .rdata figures in a library
-    ## loading them all into my global environment
-    load("~/projects/diet_mouse_cdiff/figures/baiI.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/baiH.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/buty_coa_transferase.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/buty_kinase.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/but_stats.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/buk_stats.rdata")
-    load("~/projects/diet_mouse_cdiff/figures/baiH_stats.rdata")
+    ## loading them all into my global environment=
     load("~/projects/diet_mouse_cdiff/figures/dil_toxin.rdata")
     load("~/projects/diet_mouse_cdiff/figures/faith_pd.rdata")
     load("~/projects/diet_mouse_cdiff/figures/faith_stats.rdata")
@@ -103,19 +96,14 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/figures/rumino_abun_plot.rdat")
     load("~/projects/diet_mouse_cdiff/figures/pathogen_abun_plot.rdat")
     load("~/projects/diet_mouse_cdiff/figures/noButyrate_metab.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/newExp_avWeight_change.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/newExp_dietVendor_surv_plot.rdat")
 
 
     ## adding data files to project data directory to be loaded in later
     ## creating a named list of them
     figure_list <- list(all_day_plot = all_day_plot,
-                       baiH = baiH,
-                       baiI = baiI,
                        bile_plot = bile_plot,
-                       but_plot = but_plot,
-                       buk_plot = buk_plot,
-                       baiH_plot = baiH_plot,
-                       butyrate_kinase = butyrate_kinase,
-                       butyryl_coa_transferase = butyryl_coa_transferase,
                        diet_plot_final = diet_plot_final,
                        dil_plot = dil_plot,
                        faith_plot = faith_plot,
@@ -134,10 +122,7 @@ load_data <- function(update){
                        family_abun1 = family_abun1,
                        stat_plot1 = stat_plot1,
                        surv_stat_vis = surv_stat_vis,
-                       tox_acetic_stats = tox_acetic_stats,
-                       tox_butanoic_stats = tox_butanoic_stats,
                        tox_metab_stat_vis = tox_metab_stat_vis,
-                       tox_propanoic_stats = tox_propanoic_stats,
                        unweighted_pcoa = unweighted_pcoa,
                        uu_homog_plot = uu_homog_plot,
                        uu_homog_stat_vis = uu_homog_stat_vis,
@@ -172,7 +157,6 @@ load_data <- function(update){
                        hypoxia_locationDiet_plot = hypoxia_locationDiet_plot,
                        hypoxia_dietLocation_plot = hypoxia_dietLocation_plot,
                        hypox_colonStats_plot = hypox_colonStats_plot,
-                       hypox_cecumHisto_plot = hypox_cecumHisto_plot,
                        cecum_histo_plot = cecum_histo_plot,
                        colon_histo_plot = colon_histo_plot,
                        genus_plot1 = genus_plot1,
@@ -197,7 +181,9 @@ load_data <- function(update){
                        lachno_abun_plot = lachno_abun_plot,
                        rumino_abun_plot = rumino_abun_plot,
                        path_abun_plot = path_abun_plot,
-                       notButy_plot = notButy_plot)
+                       notButy_plot = notButy_plot,
+                       newExp_avWeight_plot = newExp_avWeight_plot,
+                       newExp_dietVendor_surv_plot = newExp_dietVendor_surv_plot)
 
 
     ## going through the named list I created above
