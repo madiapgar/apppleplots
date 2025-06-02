@@ -9,6 +9,22 @@ NULL
 #' @format ggplot object
 "all_day_plot"
 
+#' Arizona Experiments Live Culture Infection Weights Plot
+#'
+#' The average percent change in mouse weight after infection with C. difficile by diet for the
+#' live culture infection cohort.
+#'
+#' @format ggplot object
+"az_liveCult_weights_plot"
+
+#' Arizona Experiments Spore Infection (survival cohort) Weights Plot
+#'
+#' The average percent change in mouse weight after infection with C. difficile by diet for the
+#' spore infection cohort (also known as the survival cohort in the manuscript).
+#'
+#' @format ggplot object
+"az_spore_weights_plot"
+
 #' Bile Acid Concentration Plot
 #'
 #' Cecal sample primary and secondary bile acid concentrations at the last day of the
@@ -279,6 +295,24 @@ NULL
 #' @format ggplot object
 "lachno_abun_plot"
 
+#' Lactococcus Contamination Relative Abundance Plot
+#'
+#' Features the Lactococcus relative abundance throughout the experimental timeline, faceted by diet.
+#' Since we found an inert signal of Lactococcus due to the use of casein to produce the food of the mice on
+#' purified diets, we wanted to look at the extent of the contamination.
+#'
+#' @format ggplot object
+"lacto_contam_plot"
+
+#' Lactococcus Contamination Relative Abundance Statistical Results Plot
+#'
+#' Features the Lactococcus relative abundance throughout the experimental timeline, faceted by diet.
+#' Pairwise comparisons between purified diet relative abundance of Lactococcus over time.
+#' Is related to `lacto_contam_plot`.
+#'
+#' @format ggplot object
+"lacto_stat_plot"
+
 #' Metabolite and Bile Acid Concentration Correlation Statistical Results Plot
 #'
 #' Cecal metabolite concentrations (acetic acid, n-butanoic acid, and propanoic acid) correlated
@@ -509,6 +543,23 @@ NULL
 #'
 #' @format ggplot object
 "stat_plot1"
+
+#' Cecum Bile Acid Comparisons (manuscript version - supplemental figure)
+#'
+#' Linear correlation comparisons for each diet between bile acid concentration and C. difficile toxin
+#' concentration/histopathology scores all at day 3.
+#'
+#' @format ggplot object
+"supp_fig2a"
+
+#' Cecal Acetate and Propionate Comparisons (manuscript version - supplemental figure)
+#'
+#' Concentrations of acetate/propionate at day 3 and linear correlation comparisons for each diet
+#' between acetate/propionate concentration and C. difficile toxinconcentration/histopathology scores
+#' all at day 3.
+#'
+#' @format ggplot object
+"supp_fig2bc"
 
 #' Survival Statistical Results Plot
 #'

@@ -98,6 +98,12 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/figures/noButyrate_metab.rdat")
     load("~/projects/diet_mouse_cdiff/figures/newExp_avWeight_change.rdat")
     load("~/projects/diet_mouse_cdiff/figures/newExp_dietVendor_surv_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/supp_fig2a.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/supp_fig2bc.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/lacto_contam_relAbun.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/lacto_contam_relAbun_stats.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/az_liveCult_avWeight_change.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/az_spore_avWeight_change.rdat")
 
 
     ## adding data files to project data directory to be loaded in later
@@ -164,7 +170,6 @@ load_data <- function(update){
                        colony_bloodOnly_plot = colony_bloodOnly_plot,
                        poster_abun2 = poster_abun2,
                        histo_perc_plot = histo_perc_plot,
-                       ## plots below don't have documentation filled out yet!!
                        noDiet_histoCecum_toxStats_plot = noDiet_histoCecum_toxStats_plot,
                        faith_combStats_plot = faith_combStats_plot,
                        microbeProd_relAbunStats_plot = microbeProd_relAbunStats_plot,
@@ -183,7 +188,13 @@ load_data <- function(update){
                        path_abun_plot = path_abun_plot,
                        notButy_plot = notButy_plot,
                        newExp_avWeight_plot = newExp_avWeight_plot,
-                       newExp_dietVendor_surv_plot = newExp_dietVendor_surv_plot)
+                       newExp_dietVendor_surv_plot = newExp_dietVendor_surv_plot,
+                       supp_fig2a = supp_fig2a,
+                       supp_fig2bc = supp_fig2bc,
+                       lacto_contam_plot = lacto_contam_plot,
+                       lacto_stat_plot = lacto_stat_plot,
+                       az_liveCult_weights_plot = az_liveCult_weights_plot,
+                       az_spore_weights_plot = az_spore_weights_plot)
 
 
     ## going through the named list I created above
