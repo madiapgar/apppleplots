@@ -148,6 +148,22 @@ NULL
 #' @format ggplot object
 "faith_combStats_plot"
 
+#' CFU Counts Based on Sickness Status (faceted by diet)
+#'
+#' CFU counts related to whether the mice got sick or survived to the end of the time course and the dominant
+#' microbes sequenced from the cultures, faceted by diet (comparisons within diets).
+#'
+#' @format ggplot object
+"facet_diet_cfu_plot"
+
+#' CFU Counts Based on Sickness Status (faceted by status)
+#'
+#' CFU counts related to whether the mice got sick or survived to the end of the time course and the dominant
+#' microbes sequenced from the cultures, faceted by status (comparisons between diets within status).
+#'
+#' @format ggplot object
+"facet_status_cfu_plot"
+
 #' Microbe Family Relative Abundance Plot
 #'
 #' Fecal stool sample microbe relative abundances across experimental timeline, sectioned out by Family.

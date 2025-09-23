@@ -8,11 +8,12 @@ facet_twice_plots(
   input_table,
   x_value,
   y_value,
-  x_value_type,
+  x_value_type = NULL,
   y_transform = FALSE,
   x_labels,
   box_group_by,
   line_group_by,
+  smooth_line = NULL,
   point_alpha = 0.4,
   facet_rows,
   facet_cols,
@@ -41,6 +42,9 @@ facet_twice_plots(
 the x-axis column name (as a string)}
 
 \item{line_group_by}{The column name of how you want to be your lines to be grouped (i.e. by sample ID)}
+
+\item{smooth_line}{Do you want a non-linear trend line added to your plot (done via geom_smooth)? Accepts inputs of 'NULL' (default),
+'TRUE', 'true', or 'yes'.}
 
 \item{point_alpha}{Enter a numeric value between 0 and 1 to change the transparency of your points, default is 0.4}
 

@@ -6,8 +6,7 @@ load_data <- function(update){
 
   if (update == TRUE) {
     ## putting all of my .rdata figures in a library
-    ## loading them all into my global environment=
-    load("~/projects/diet_mouse_cdiff/figures/dil_toxin.rdata")
+    ## loading them all into my global environment
     load("~/projects/diet_mouse_cdiff/figures/faith_pd.rdata")
     load("~/projects/diet_mouse_cdiff/figures/faith_stats.rdata")
     load("~/projects/diet_mouse_cdiff/figures/histo_metab_cecum.rdata")
@@ -104,6 +103,8 @@ load_data <- function(update){
     load("~/projects/diet_mouse_cdiff/figures/lacto_contam_relAbun_stats.rdat")
     load("~/projects/diet_mouse_cdiff/figures/az_liveCult_avWeight_change.rdat")
     load("~/projects/diet_mouse_cdiff/figures/az_spore_avWeight_change.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/cfuQuant_dietComp_plot.rdat")
+    load("~/projects/diet_mouse_cdiff/figures/cfuQuant_statusComp_plot.rdat")
 
 
     ## adding data files to project data directory to be loaded in later
@@ -111,7 +112,6 @@ load_data <- function(update){
     figure_list <- list(all_day_plot = all_day_plot,
                        bile_plot = bile_plot,
                        diet_plot_final = diet_plot_final,
-                       dil_plot = dil_plot,
                        faith_plot = faith_plot,
                        faith_stat_vis = faith_stat_vis,
                        histo_metabCecum_plot = histo_metabCecum_plot,
@@ -194,7 +194,9 @@ load_data <- function(update){
                        lacto_contam_plot = lacto_contam_plot,
                        lacto_stat_plot = lacto_stat_plot,
                        az_liveCult_weights_plot = az_liveCult_weights_plot,
-                       az_spore_weights_plot = az_spore_weights_plot)
+                       az_spore_weights_plot = az_spore_weights_plot,
+                       facet_status_cfu_plot = facet_status_cfu_plot,
+                       facet_diet_cfu_plot = facet_diet_cfu_plot)
 
 
     ## going through the named list I created above

@@ -21,6 +21,8 @@
 #' @param box_group_by The column name of how you want your boxplots to be grouped, typically is the same as
 #'   the x-axis column name (as a string)
 #' @param line_group_by The column name of how you want to be your lines to be grouped (i.e. by sample ID)
+#' @param smooth_line Do you want a non-linear trend line added to your plot (done via geom_smooth)? Accepts inputs of 'NULL' (default),
+#' 'TRUE', 'true', or 'yes'.
 #' @param point_alpha Enter a numeric value between 0 and 1 to change the transparency of your points, default is 0.4
 #' @param facet_rows The column name that you want to facet your plot ROWS by (as a string)
 #' @param facet_cols The column name that you want to facet your plot COLUMNS by (as a string)
@@ -36,11 +38,12 @@
 facet_twice_plots <- function(input_table,
                               x_value,
                               y_value,
-                              x_value_type,
+                              x_value_type = NULL,
                               y_transform = FALSE,
                               x_labels,
                               box_group_by,
                               line_group_by,
+                              smooth_line = NULL,
                               point_alpha = 0.4,
                               facet_rows,
                               facet_cols,
@@ -53,7 +56,6 @@ facet_twice_plots <- function(input_table,
             ggplot2::ggplot(aes(x = .data[[x_value]], y = .data[[y_value]])) +
             ggplot2::geom_boxplot(aes(group = .data[[box_group_by]]), outlier.shape = NA) +
             ggplot2::geom_line(aes(group = .data[[line_group_by]]), alpha = 0.1) +
-            ggplot2::geom_smooth(se = FALSE) +
             ggplot2::geom_jitter(width = 0.1, height = 0, alpha = point_alpha) +
             ggplot2::theme_bw() +
             ggplot2::ggtitle(title_content) +
@@ -68,6 +70,12 @@ facet_twice_plots <- function(input_table,
     } else {
       plot <- plot + ggplot2::scale_x_continuous(breaks = x_labels)
     }
+  }
+
+  if (is.null(smooth_line)) {
+    plot
+  } else {
+    plot <- plot + ggplot2::geom_smooth(se = FALSE)
   }
 
 
